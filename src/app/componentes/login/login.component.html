@@ -1,0 +1,12 @@
+<h2>{{title}}</h2>
+<form action="" method="">
+    <label for="usuario">Usuario:</label>
+    <input type="text" id="usuario" name="usuario" [(ngModel)]="nombre" required><br><br>
+
+    <label for="contrasena">Contraseña:</label>
+    <input type="password" id="contrasena" name="contrasena" [(ngModel)]="clave" required><br><br>
+
+    <button (click)="login(nombre, clave)">Iniciar Sesión</button>
+    <button (click)="reset()">Limpiar</button>
+    <button >Omitir</button>
+</form>
