@@ -1,0 +1,43 @@
+.login-wrap {
+    background-color: #F8FA9E;
+    border-radius: 10px; /* Añade esquinas redondeadas */
+    box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Añade una sombra sutil */
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+
+    
+}
+
+.login-form .form-control {
+    background-color: #ffffff;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    height: 48px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-bottom: 1rem;
+}
+
+.login-form .form-control:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    background-color: #F8FA9E; /* Mantiene el color de fondo al enfocar */
+}
+
+.login-form .btn-primary {
+    background: #AC97C0;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: none;
+    height: 48px;
+    transition: all 0.3s ease;
+}
+
+.login-form .btn-primary:hover,
+.login-form .btn-primary:focus {
+    background: #946db8;
+}
+
+
