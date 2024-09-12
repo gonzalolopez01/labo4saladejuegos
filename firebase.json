@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/labo4-sala-de-juegos/browser",
+    "public": "public",
     "headers": [
       {
         "source": "/index.html",

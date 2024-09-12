@@ -1,0 +1,51 @@
+
+<!-- <form action="" method="">
+    <label for="usuario">Usuario:</label>
+    <input type="text" id="usuario" name="usuario" [(ngModel)]="nombre" required><br><br>
+
+    <label for="contrasena">Contraseña:</label>
+    <input type="password" id="contrasena" name="contrasena" [(ngModel)]="clave" required><br><br>
+
+    <button (click)="login(nombre, clave)">Iniciar Sesión</button>
+    <button (click)="reset()">Limpiar</button>
+    <button >Omitir</button>
+</form> -->
+
+<div class="container row justify-content-center">
+    
+    
+    <div class="login-wrap p-4 p-md-5">
+        <div class="container d-flex justify-content-between">           
+            <h2 class="text-left mb-5">{{title}}</h2>        
+            <!-- <img src="assets/img/logo_WNW_icon.ico" class="img-fluid" alt="logo" class="w-25 h-25">            -->
+            <img src="assets/img/logo.png" class="img-fluid" alt="logo" class="logo"> 
+        </div>
+        <form action="#" class="login-form">
+            <div class="mb-3">
+                <!-- <label for="usuario" class="form-label">Usuario (email)</label> -->
+                <input type="email" class="form-control" id="usuario" [(ngModel)]="nombre" required aria-describedby="emailHelp" name="usuario" placeholder="Usuario - Email">
+            <div id="emailHelp" class="form-text">Si no estas registrado puedes registrarte con tu email.</div>
+            </div>
+
+            <div class="mb-3">
+                <!-- <label for="contrasena" class="form-label">Contraseña</label> -->
+                <input type="password" class="form-control mb-5" id="contrasena" name="contrasena" [(ngModel)]="clave" required placeholder="Contraseña">
+            </div>
+
+            <!-- <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+            </div> -->
+            <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
+            <div class="mb-3">
+                <button (click)="login(nombre, clave)" class="form-control btn btn-primary">Iniciar Sesión</button>          
+            </div>
+            <div class="mb-3">
+                <button (click)="reset()" class="form-control btn btn-primary">Registrarse</button>
+            </div>
+            <div class="mb-3">
+                <button (click)="omitir()" class="form-control btn btn-primary">Omitir</button>
+            </div>
+        </form>
+    </div>
+</div>
