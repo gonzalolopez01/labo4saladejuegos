@@ -53,6 +53,8 @@ export class LoginComponent {
     }
   }
   verificarUsuario(nombre: string, clave: string): boolean{    
+    // nombre= "laura";
+    // clave="1234";
     for (let usuario of this.usuarios) {      
       if (usuario.nombre === nombre && usuario.clave === clave) {
         return true;

@@ -11,10 +11,11 @@
     <button >Omitir</button>
 </form> -->
 
-<div class="container justify-content-center">        
+<div class="container login">        
+    <!-- <div class="login-wrap p-4 p-md-5"> -->
     <div class="login-wrap p-4 p-md-5">
         <div class="container d-flex justify-content-between">           
-            <h2 class="text-left mb-5">{{title}}</h2>        
+            <h2 class="text-left mb-5 texto-blanco">{{title}}</h2>        
             <!-- <img src="assets/img/logo_WNW_icon.ico" class="img-fluid" alt="logo" class="w-25 h-25">            -->
             <img src="assets/img/logo.png" class="img-fluid" alt="logo" class="logo"> 
         </div>
@@ -22,7 +23,7 @@
             <div class="mb-3">
                 <!-- <label for="usuario" class="form-label">Usuario (email)</label> -->
                 <input type="email" class="form-control" id="usuario" [(ngModel)]="nombre" required aria-describedby="emailHelp" name="usuario" placeholder="Usuario - Email">
-            <div id="emailHelp" class="form-text">Si no estas registrado puedes registrarte con tu email.</div>
+            <div id="emailHelp" class="form-text texto-blanco">Si no estas registrado puedes registrarte con tu email.</div>
             </div>
 
             <div class="mb-3">
