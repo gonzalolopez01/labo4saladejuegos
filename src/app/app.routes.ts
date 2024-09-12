@@ -11,19 +11,14 @@ import { ChatComponent } from './componentes/chat/chat.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
-    { 
-        path: 'home', component: HomeComponent,
-        children:
-        [
-            {path: 'ahorcado', component: AhorcadoComponent},
-            {path: 'mayoromenor', component: MayorOmenorComponent},
-            {path: 'preguntados', component: PreguntadosComponent},
-            {path: 'chat', component: ChatComponent},
-            {path: 'quiensoy', component: QuienSoyComponent}
-        ]
-    },
+    { path: 'home', component: HomeComponent },
+    { path: 'ahorcado', component: AhorcadoComponent },
+    { path: 'mayoromenor', component: MayorOmenorComponent },
+    { path: 'preguntados', component: PreguntadosComponent },
+    { path: 'chat', component: ChatComponent },
+    { path: 'quiensoy', component: QuienSoyComponent },
     { path: 'login', component: LoginComponent },
     { path: 'registro', component: RegistroComponent },
     { path: 'about', component: QuienSoyComponent },
-    { path: '**', component: PageNotFoundComponent}
+    { path: '**', component: PageNotFoundComponent }
 ];

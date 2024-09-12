@@ -1,0 +1,12 @@
+.contenedor {    
+    justify-content: space-evenly; 
+    align-items: center; 
+    height: 100%; 
+    width: 1200px;        
+    margin: 0px;
+    padding: 0px;
+}
+.card{
+    margin-top: 20px;
+    margin-bottom: 20px;    
+}

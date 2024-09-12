@@ -10,3 +10,43 @@
     margin-top: 20px;
     margin-bottom: 20px;    
 }
+.card-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.contenedor-fijo {
+    width: 280px; /* Ancho fijo */
+    height: 460px; /* Altura fija */
+    overflow: hidden; /* Oculta el contenido que desborda */
+    border: 1px solid #ddd; /* Opcional: agrega un borde para visualizar el contenedor */
+}
+.contenedor-fijo img {
+width: 100%; /* Ajusta la imagen al ancho del contenedor */
+height: auto; /* Mantiene la proporción de la imagen */
+}
+.row{
+    width: 100vw;        
+    margin: 0px;
+    justify-content: space-around;     
+    align-items: center;
+}
+.btn{
+    background-color: rgb(112, 230, 112);
+    border: 0px;
+}
+.login-form .btn-primary {
+    background: rgb(112, 230, 112);
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: none;
+    height: 48px;
+    transition: all 0.3s ease;
+}
+
+.btn:hover,
+.btn:focus {
+    background: green;
+}

@@ -1,14 +1,16 @@
 /* app.component.css */
-:host {
+:host {/*le aplico estilo al contenedor del componente*/
     display: block;
     height: 100vh; /* Ocupa toda la altura de la ventana */
     background-color: green; /* Fondo verde */
-    margin: 0; /* Elimina márgenes predeterminados */
+    margin: 0; /* Elimina márgenes predeterminados */    
+    width: 100%;
   }
   
-  .container {
-    display: flex;
-    justify-content: center; /* Centra horizontalmente */
-    align-items: center; /* Centra verticalmente */
-    height: 100%; /* Ocupa el 100% de la altura del componente principal */
-  }
+.container {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  height: 100%;  
+  width: 100%;
+}

@@ -1,11 +1,19 @@
+:root{
+    --fondo: #3F3F43;
+    --colorLetrasFondoOscuro: white;
+    --colorBoton: lightblue;
+
+}
+.texto-blanco{
+    color: white;
+}
 .login-wrap {
-    background-color: #F8FA9E;
+    /*background-color: #3F3F43;*/
+    background-color: #3F3F43;
     border-radius: 10px; /* Añade esquinas redondeadas */
     box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Añade una sombra sutil */
     margin-top: 3rem;
     margin-bottom: 3rem;
-
-    
 }
 
 .login-form .form-control {
@@ -19,13 +27,13 @@
 }
 
 .login-form .form-control:focus {
-    border-color: #80bdff;
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-    background-color: #F8FA9E; /* Mantiene el color de fondo al enfocar */
+    border-color: green;
+    box-shadow: 0 0 0 0.2rem rgba(202, 206, 211, 0.25);
+    background-color: rgb(233, 233, 233); /* Mantiene el color de fondo al enfocar */
 }
 
 .login-form .btn-primary {
-    background: #AC97C0;
+    background: rgb(112, 230, 112);
     border: none;
     color: #fff;
     cursor: pointer;
@@ -37,13 +45,19 @@
 
 .login-form .btn-primary:hover,
 .login-form .btn-primary:focus {
-    background: #946db8;
+    background: green;
 }
 
 .logo{
     height: 30px;
     width: 40px;
     margin-top: 7px;
+}
+.login{
+    display: flex;
+    justify-content: center;  
+    align-items: center;      
+    height: 100vh;     /*me aseguro que el contenedor ocupe todo el alto de la ventana*/
 }
 
 
