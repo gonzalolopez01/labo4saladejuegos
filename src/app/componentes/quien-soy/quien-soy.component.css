@@ -1,6 +1,0 @@
-.container {        
-    display: flex;
-    justify-content: center;  
-    align-items: center;      
-    height: 100vh;     /*me aseguro que el contenedor ocupe todo el alto de la ventana*/
- }

@@ -1,6 +1,32 @@
+<nav class="navbar bg-body-tertiary">
+    <div class="container">
+        <h1>Sala de Juegos</h1>
+        <!-- <a class="navbar-brand" href="#">
+            <img src="../../../assets/img/logo.png" alt="sala de juegos" width="30" height="24">
+            </a>        -->
+        <!-- <ng-container *ngIf="!isUserLoggedIn; else elseBlock"> -->
+        <ng-container *ngIf="!auth.currentUser?.email; else elseBlock">            
+            <button [routerLink]="'./login'">Login</button>
+            <button [routerLink]="'./registro'">Resgistrarse</button>
+            <!-- <p>{{ login }}</p> -->
+        </ng-container>
+        <ng-template #elseBlock>
+            <!-- <p>{{logout}}</p> -->
+            <button [routerLink]="'./login'">Logout</button>
+            <p>{{auth.currentUser?.email}}</p>
+        </ng-template>        
+        <!-- <a href="/home/login" class="btn btn-primary">Login</a> -->
+    </div>
+        
+</nav>
+
 <div class="container-fluid justify-content-center">
+    <p>Home works</p>
+    <router-outlet />
     <!-- <div class="contenedor"> -->
-        <div class="row justify-content-center">
+
+
+        <!-- <div class="row justify-content-center">
             <div class="col-md-4 div-card">
                 <div class="card contenedor-fijo">
                     <img src="../../../assets/img/elahorcado.png" class="card-img-top" alt="...">
@@ -63,6 +89,8 @@
                     </div>
                 </div>
             </div>          
-        </div>
+        </div> -->
+
+        
     <!-- </div>  -->
 </div>

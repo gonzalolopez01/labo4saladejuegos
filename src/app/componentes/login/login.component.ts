@@ -3,64 +3,62 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Usuario } from '../../clases/usuario';
 
+import { Auth, signInWithEmailAndPassword, signOut } from '@angular/fire/auth';
+import { CommonModule } from '@angular/common';
+import { LoginsService } from '../../services/logins.service';
+
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  constructor(private router: Router){
 
+  constructor(private router: Router, public auth: Auth, private loginsReg: LoginsService){
   }
   title = 'Login';
 
-  usuarios : Usuario[] = [];
+  userMail: string = "";
+  userPWD: string = "";
 
-  nombre! : string;
-  clave! : string;  
+  loggedUser: string = "";  
 
-  login(nombre:string, clave:string){
-    this.cargarUsuarios();    
+  Login() {
+    signInWithEmailAndPassword(this.auth, this.userMail, this.userPWD).then((res) => {
+      //conexion/mail/contraseña
+      if (res.user.email !== null) this.loggedUser = res.user.email;
 
-    if(this.verificarUsuario(nombre, clave)){
-      this.router.navigate(['/home'])
-      console.log("bienvenido");
-    }else{
-      this.router.navigate(['login/error'])
-      console.log("error");
-    }
-  }
-  omitir(){
-    this.router.navigate(['/home'])
-  }
-  reset(){
-    this.nombre = "";
-    this.clave = "";    
-  }
-  cargarUsuarios(){
-    const strUsuarios = localStorage.getItem("usuarios");
-    
-    if(strUsuarios){
-      const usuariosParseados = JSON.parse(strUsuarios || '[]');      
-      
-      this.usuarios = usuariosParseados.map((user: any) => new Usuario(user.nombre, user.clave));
-      
-    }
-    else{
-      console.log('No hay usuarios guardados en el Local Storage');
-    }
-  }
-  verificarUsuario(nombre: string, clave: string): boolean{    
-    // nombre= "laura";
-    // clave="1234";
-    for (let usuario of this.usuarios) {      
-      if (usuario.nombre === nombre && usuario.clave === clave) {
-        return true;
-      }
-    }
-    return false;
+      //aca hacemos el ruteo al home, porque paso la res
+      console.log("logeado con exito");
+      this.loginsReg.LoginReg(this.loggedUser);
+      this.loginsReg.GetDataReg();
+      this.router.navigate(['../']);
+
+
+    }).catch((e) => 
+      console.log(e)
+      //aca informamos al usuario el error
+      //flagError = true
+      //y hacemos el tema del switch como antes
+    )
   }
 
+  CloseSession(){
+    signOut(this.auth).then(() => {
+      //console.log(this.auth.currentUser?.email)
+      //aca podemos hacer el ruteo al login porque se cerro la sesion
+      //console.log("logout con exito");
+      this.router.navigate(['../']);
+    //}).catch
+    })
+  } 
+
+  // navegar() {
+  //   if () {
+  //     this.router.navigate(['/otra-ruta']);
+  //   }
+  // }
+  
 }

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MayorOmenorComponent } from './mayor-omenor.component';
+import { QuiensoyComponent } from './quiensoy.component';
 
-describe('MayorOmenorComponent', () => {
-  let component: MayorOmenorComponent;
-  let fixture: ComponentFixture<MayorOmenorComponent>;
+describe('QuiensoyComponent', () => {
+  let component: QuiensoyComponent;
+  let fixture: ComponentFixture<QuiensoyComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MayorOmenorComponent]
+      imports: [QuiensoyComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(MayorOmenorComponent);
+    fixture = TestBed.createComponent(QuiensoyComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
