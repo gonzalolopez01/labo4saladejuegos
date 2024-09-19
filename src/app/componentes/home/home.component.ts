@@ -40,7 +40,9 @@ export class HomeComponent implements OnInit{
       //console.log(this.auth.currentUser?.email)
       //aca podemos hacer el ruteo al login porque se cerro la sesion
       //console.log("logout con exito");
-      this.router.navigate(['../']);
+      
+      //this.router.navigate(['../']);
+      this.router.navigate(['/home']);
     //}).catch
     })
   } 
