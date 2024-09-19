@@ -1,8 +1,11 @@
-nav{    
-    background-color: #3F3F43;
+div{    
+    
     --fondo: #3F3F43;    
     --colorBoton: rgb(112, 230, 112);
     --colorBotonHover:green;
+}
+nav{
+    background-color: var(--fondo);
 }
 
 .div-botones{
@@ -12,6 +15,7 @@ nav{
 
 .btn{
     background: var(--colorBoton);
+    /* background: rgb(112, 230, 112); */
     border: none;
     transition: all 0.3s ease;
 }
@@ -28,5 +32,32 @@ nav{
     font-family: "Silkscreen", sans-serif;
     font-weight: 400;
     font-style: normal;
+}
+
+
+/*card*/
+.div-card{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.card{
+    margin-top: 20px;
+    margin-bottom: 20px;    
+}
+.card-body {
+    padding-bottom: 50px; /* lugar para el boton*/
+}
+.contenedor-fijo {
+    width: 220px; 
+    height: 450px; 
+    overflow: hidden;
+    border: 1px solid #ddd; /* Opcional: agrega un borde para visualizar el contenedor */
+    position: relative; /*para que lo que este adentro se mantenga en posicion por mas que el entorno se mueva*/
+}
+.contenedor-fijo img {
+    width: 100%; /* Ajusta la imagen al ancho del contenedor */
+    height: 60%; /* Mantiene la proporción de la imagen */
+    /*height: auto; /* Mantiene la proporción de la imagen */
 }
 

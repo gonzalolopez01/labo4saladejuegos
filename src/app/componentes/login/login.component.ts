@@ -7,6 +7,8 @@ import { Auth, signInWithEmailAndPassword, signOut } from '@angular/fire/auth';
 import { CommonModule } from '@angular/common';
 import { LoginsService } from '../../services/logins.service';
 
+declare var bootstrap: any;
+
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -36,14 +38,24 @@ export class LoginComponent {
       this.router.navigate(['../']);
 
 
-    }).catch((e) => 
-      console.log(e)
-      //aca informamos al usuario el error
-      //flagError = true
-      //y hacemos el tema del switch como antes
-    )
-  }
+    }).catch((e) => {//aca tambien se resolvió la promesa      
 
+      switch (e.code) {
+        case "auth/invalid-credential":
+          //this.msjError = "Email invalido";
+          this.toastCredenciales();
+          break;
+        case "auth/email-already-in-use":
+          
+          break;
+        default:
+          this.toastDefault();
+          //en vez de e.code poner algo asi como que no fue posible registrarse, como generico
+          //this.msjError = e.code
+          break;          
+      }
+    });
+  }
   CloseSession(){
     signOut(this.auth).then(() => {
       //console.log(this.auth.currentUser?.email)
@@ -59,5 +71,30 @@ export class LoginComponent {
   //     this.router.navigate(['/otra-ruta']);
   //   }
   // }
-  
+  toastCredenciales(){    
+    var $toast = document.getElementById("miTostada");
+    if($toast!=null){
+      console.log($toast);
+      const body = $toast.querySelector('.toast-body');
+      body!.textContent = "Email o contraseña incorrectos";
+      console.log(body!.textContent);
+      var toastElement = new bootstrap.Toast($toast);
+      toastElement.show();
+    }  
+  } 
+  toastDefault(){    
+    var $toast = document.getElementById("miTostada");
+    if($toast!=null){
+      console.log($toast);
+      const body = $toast.querySelector('.toast-body');
+      body!.textContent = "No fue posible logearse";
+      console.log(body!.textContent);
+      var toastElement = new bootstrap.Toast($toast);
+      toastElement.show();
+    }  
+  } 
+  AccesoRapido() {
+    this.userMail = "lolo@gmail.com";
+    this.userPWD = "123321";
+  }
 }

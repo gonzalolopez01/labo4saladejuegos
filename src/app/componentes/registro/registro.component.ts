@@ -57,7 +57,7 @@ export class RegistroComponent {
           this.toastDefault();
           //en vez de e.code poner algo asi como que no fue posible registrarse, como generico
           //this.msjError = e.code
-          break;
+          break;          
       }
     });
     
