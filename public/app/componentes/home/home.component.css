@@ -1,11 +1,41 @@
-.contenedor {    
-    justify-content: space-evenly; 
-    align-items: center; 
-    height: 100%; 
-    width: 1200px;        
-    margin: 0px;
-    padding: 0px;
+div{    
+    
+    --fondo: #3F3F43;    
+    --colorBoton: rgb(112, 230, 112);
+    --colorBotonHover:green;
 }
+nav{
+    background-color: var(--fondo);
+}
+
+.div-botones{
+    width: 250px;
+    justify-content: space-between;
+}
+
+.btn{
+    background: var(--colorBoton);
+    /* background: rgb(112, 230, 112); */
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.btn:hover,
+.btn:focus {
+    background: var(--colorBotonHover);
+}
+
+.texto-blanco{
+    color: white;
+}
+.silkscreen-regular {
+    font-family: "Silkscreen", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+/*card*/
 .div-card{
     display: flex;
     justify-content: center;
@@ -19,45 +49,15 @@
     padding-bottom: 50px; /* lugar para el boton*/
 }
 .contenedor-fijo {
-    width: 280px; 
-    height: 430px; 
+    width: 220px; 
+    height: 450px; 
     overflow: hidden;
     border: 1px solid #ddd; /* Opcional: agrega un borde para visualizar el contenedor */
     position: relative; /*para que lo que este adentro se mantenga en posicion por mas que el entorno se mueva*/
 }
 .contenedor-fijo img {
-width: 100%; /* Ajusta la imagen al ancho del contenedor */
-height: 60%; /* Mantiene la proporción de la imagen */
-/*height: auto; /* Mantiene la proporción de la imagen */
-}
-.row{
-    width: 100vw;        
-    margin: 0px;
-    justify-content: space-around;     
-    align-items: center;
-}
-.btn{
-    background-color: rgb(112, 230, 112);
-    border: 0px;
-
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    /*transform: translateX(-50%); /* centra horizontalmente al boton */
-    width: auto; /* Ajusta el tamaño si es necesario */
-}
-.login-form .btn-primary {
-    background: rgb(112, 230, 112);
-    border: none;
-    color: #fff;
-    cursor: pointer;
-    border-radius: 5px;
-    box-shadow: none;
-    height: 48px;
-    transition: all 0.3s ease;
+    width: 100%; /* Ajusta la imagen al ancho del contenedor */
+    height: 60%; /* Mantiene la proporción de la imagen */
+    /*height: auto; /* Mantiene la proporción de la imagen */
 }
 
-.btn:hover,
-.btn:focus {
-    background: green;
-}

@@ -1,68 +1,125 @@
-<div class="container-fluid justify-content-center">
-    <!-- <div class="contenedor"> -->
-        <div class="row justify-content-center">
-            <div class="col-md-4 div-card">
-                <div class="card contenedor-fijo">
-                    <img src="../../../assets/img/elahorcado.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                    <h5 class="card-title">El Ahorcado</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="/ahorcado" class="btn btn-primary">Cargar</a>
+<!-- <nav class="navbar bg-body-tertiary"> -->
+<div>
+<nav class="navbar">
+    <div class="container">        
+        <div class="d-flex">
+            <a class="navbar-brand" href="#">
+                <img class="mt-2" src="../../../assets/img/logo.png" alt="sala de juegos" width="30" height="24">
+            </a>
+            <h1 class="texto-blanco silkscreen-regular">Sala de Juegos</h1>
+        </div>
+        
+        <div>
+            <div>
+                <ng-container *ngIf="!auth.currentUser?.email; else elseBlock">  
+                    <div class="div-botones d-flex">
+                        <div>
+                            <button class="btn btn-primary texto-blanco silkscreen-regular" type="button" [routerLink]="'./login'">Login</button>
+                        </div>
+                        <div>
+                            <button class="btn btn-primary texto-blanco silkscreen-regular" type="button" [routerLink]="'./registro'">Resgistrarse</button>            
+                        </div>                      
                     </div>
-                </div>
-            </div>  
-            <div class="col-md-4 div-card">
-                <div class="card contenedor-fijo">
-                    <img src="../../../assets/img/mayoromenor.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                    <h5 class="card-title">Mayor o Menor</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="mayoromenor" class="btn btn-primary">Cargar</a>
-                    </div>
-                </div>
-            </div>        
-            <div class="col-md-4 div-card">
-                <div class="card contenedor-fijo">
-                    <img src="../../../assets/img/preguntados.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                    <h5 class="card-title">Preguntados</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="preguntados" class="btn btn-primary">Cargar</a>
-                    </div>
-                </div>
+                </ng-container>
+            </div>
+            <div>
+                <ng-template #elseBlock>       
+                    <div class="div-botones d-flex">
+                        <!-- <button class="btn btn-primary " type="button" [routerLink]="'./login'">Logout</button> -->
+                        <p class="mt-2 text-center texto-blanco">Usuario: {{auth.currentUser?.email}}</p>
+                        <button (click)="CloseSession()" class="btn texto-blanco">Logout</button>                 
+                    </div>     
+                </ng-template>                
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-4 div-card">
-                <div class="card contenedor-fijo">
-                    <img src="" class="card-img-top" alt="...">
-                    <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="**" class="btn btn-primary">Cargar</a>
+    </div>   
+</nav>
+<div>
+    <router-outlet />
+</div>
+<!-- <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <router-outlet />
+      </div>
+    </div>
+</div> -->
+
+<!-- <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        Contenido en un contenedor que ocupa el 100% del ancho
+      </div>
+    </div>
+</div> -->
+<!-- <div class="container">
+    <div class="row">
+      <div class="col">
+        Contenido en un contenedor con ancho fijo
+      </div>
+    </div>
+</div> -->
+
+<div *ngIf="!isChildActive">    
+    <div class="container-fluid">  
+        <div class="contenedor">
+            <div class="row">
+                <div class="col div-card">                
+                    <div class="card contenedor-fijo">
+                        <img src="../../../assets/img/elahorcado.png" class="card-img-top" alt="...">
+                        <div class="card-body">
+                        <h5 class="card-title">El Ahorcado</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <button class="btn btn-primary texto-blanco silkscreen-regular" type="button" [routerLink]="'./juegos/ahorcado'">Cargar</button>
+                        </div>
+                    </div>
+                </div>  
+                <div class="col div-card">                
+                    <div class="card contenedor-fijo">
+                        <img src="../../../assets/img/mayoromenor.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                        <h5 class="card-title">Mayor o Menor</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <button class="btn btn-primary texto-blanco silkscreen-regular" type="button" [routerLink]="'./juegos/mayoromenor'">Cargar</button>
+                        </div>
+                    </div>
+                </div>        
+                <div class="col div-card">                
+                    <div class="card contenedor-fijo">
+                        <img src="../../../assets/img/preguntados.png" class="card-img-top" alt="...">
+                        <div class="card-body">
+                        <h5 class="card-title">Preguntados</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <button class="btn btn-primary texto-blanco silkscreen-regular" type="button" [routerLink]="'./juegos/preguntados'">Cargar</button>
+                        </div>
                     </div>
                 </div>
-            </div>         
-            <div class="col-md-4 div-card">
-                <div class="card contenedor-fijo">
-                    <img src="../../../assets/img/chatroom.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                    <h5 class="card-title">Chat-Room</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="chat" class="btn btn-primary">Cargar</a>
+            <!-- </div>
+            <div class="row">                 -->
+                <div class="col div-card">                
+                    <div class="card contenedor-fijo">
+                        <img src="../../../assets/img/chatroom.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                        <h5 class="card-title">Chat-Room</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <button class="btn btn-primary texto-blanco silkscreen-regular" type="button" [routerLink]="'./juegos/chat'">Cargar</button>
+                        </div>
                     </div>
-                </div>
-            </div>  
-            <div class="col-md-4 div-card">
-                <div class="card contenedor-fijo">
-                    <img src="../../../assets/img/usericon.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                    <h5 class="card-title">Quien soy</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="quiensoy" class="btn btn-primary">Cargar</a>
+                </div>  
+                <div class="col div-card">                
+                    <div class="card contenedor-fijo">
+                        <img src="../../../assets/img/usericon.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                        <h5 class="card-title">Quien soy</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <!-- <a href="quiensoy" class="btn btn-primary">Cargar</a> -->
+                        <button class="btn btn-primary texto-blanco silkscreen-regular" type="button" [routerLink]="'./juegos/quiensoy'">Cargar</button>
+                        </div>
                     </div>
-                </div>
-            </div>          
-        </div>
-    <!-- </div>  -->
+                </div>          
+            </div>
+        </div> 
+    </div>
+</div>
+
 </div>

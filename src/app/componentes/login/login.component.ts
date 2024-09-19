@@ -35,7 +35,9 @@ export class LoginComponent {
       //aca hacemos el ruteo al home, porque paso la res      
       this.loginsReg.LoginReg(this.loggedUser);
       this.loginsReg.GetDataReg();
-      this.router.navigate(['../']);
+      // this.router.navigate(['../']);
+      this.router.navigate(['/home']);
+      
 
 
     }).catch((e) => {//aca tambien se resolvió la promesa      
@@ -61,7 +63,9 @@ export class LoginComponent {
       //console.log(this.auth.currentUser?.email)
       //aca podemos hacer el ruteo al login porque se cerro la sesion
       //console.log("logout con exito");
-      this.router.navigate(['../']);
+
+      //this.router.navigate(['../']);
+      this.router.navigate(['/home']);
     //}).catch
     })
   } 
