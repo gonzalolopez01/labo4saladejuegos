@@ -1,28 +1,66 @@
-<nav class="navbar bg-body-tertiary">
-    <div class="container">
-        <h1>Sala de Juegos</h1>
-        <!-- <a class="navbar-brand" href="#">
-            <img src="../../../assets/img/logo.png" alt="sala de juegos" width="30" height="24">
-            </a>        -->
-        <!-- <ng-container *ngIf="!isUserLoggedIn; else elseBlock"> -->
-        <ng-container *ngIf="!auth.currentUser?.email; else elseBlock">            
-            <button [routerLink]="'./login'">Login</button>
-            <button [routerLink]="'./registro'">Resgistrarse</button>
-            <!-- <p>{{ login }}</p> -->
-        </ng-container>
-        <ng-template #elseBlock>
-            <!-- <p>{{logout}}</p> -->
-            <button [routerLink]="'./login'">Logout</button>
-            <p>{{auth.currentUser?.email}}</p>
-        </ng-template>        
-        <!-- <a href="/home/login" class="btn btn-primary">Login</a> -->
-    </div>
+<!-- <nav class="navbar bg-body-tertiary"> -->
+<nav class="navbar">
+    <div class="container">        
+        <div class="d-flex">
+            <a class="navbar-brand" href="#">
+                <img class="mt-2" src="../../../assets/img/logo.png" alt="sala de juegos" width="30" height="24">
+            </a>
+            <h1 class="texto-blanco silkscreen-regular">Sala de Juegos</h1>
+        </div>
         
+        <div>
+            <div>
+                <ng-container *ngIf="!auth.currentUser?.email; else elseBlock">  
+                    <div class="div-botones d-flex">
+                        <div>
+                            <button class="btn btn-primary texto-blanco silkscreen-regular" type="button" [routerLink]="'./login'">Login</button>
+                        </div>
+                        <div>
+                            <button class="btn btn-primary texto-blanco silkscreen-regular" type="button" [routerLink]="'./registro'">Resgistrarse</button>            
+                        </div>                      
+                    </div>
+                </ng-container>
+            </div>
+            <div>
+                <ng-template #elseBlock>       
+                    <div class="div-botones d-flex">
+                        <!-- <button class="btn btn-primary " type="button" [routerLink]="'./login'">Logout</button> -->
+                        <p class="mt-2 text-center texto-blanco">Usuario: {{auth.currentUser?.email}}</p>
+                        <button (click)="CloseSession()" class="btn texto-blanco">Logout</button>                 
+                    </div>     
+                </ng-template>                
+            </div>
+        </div>
+    </div>   
 </nav>
-
-<div class="container-fluid justify-content-center">
-    <p>Home works</p>
+<div>
     <router-outlet />
+</div>
+<!-- <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <router-outlet />
+      </div>
+    </div>
+</div> -->
+
+<!-- <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        Contenido en un contenedor que ocupa el 100% del ancho
+      </div>
+    </div>
+</div> -->
+<!-- <div class="container">
+    <div class="row">
+      <div class="col">
+        Contenido en un contenedor con ancho fijo
+      </div>
+    </div>
+</div> -->
+
+<!-- <div class="container d-flex justify-content-center">     -->
+    <!-- <router-outlet /> -->
     <!-- <div class="contenedor"> -->
 
 
@@ -93,4 +131,4 @@
 
         
     <!-- </div>  -->
-</div>
+<!-- </div> -->

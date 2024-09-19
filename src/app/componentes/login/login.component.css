@@ -1,51 +1,14 @@
-:root{
-    --fondo: #3F3F43;
-    --colorLetrasFondoOscuro: white;
-    --colorBoton: lightblue;
-
+div{
+    --fondo: #3F3F43;    
+    --colorBoton: rgb(112, 230, 112);
+    --colorBotonHover:green;
 }
+
 .texto-blanco{
     color: white;
-}
-.login-wrap {
-    /*background-color: #3F3F43;*/
-    background-color: #3F3F43;
-    border-radius: 10px; /* Añade esquinas redondeadas */
-    box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Añade una sombra sutil */
-    margin-top: 3rem;
-    margin-bottom: 3rem;
-}
-
-.login-form .form-control {
-    background-color: #ffffff;
-    border: 1px solid #ced4da;
-    border-radius: 5px;
-    height: 48px;
-    padding-left: 20px;
-    padding-right: 20px;
-    margin-bottom: 1rem;
-}
-
-.login-form .form-control:focus {
-    border-color: green;
-    box-shadow: 0 0 0 0.2rem rgba(202, 206, 211, 0.25);
-    background-color: rgb(233, 233, 233); /* Mantiene el color de fondo al enfocar */
-}
-
-.login-form .btn-primary {
-    background: rgb(112, 230, 112);
-    border: none;
-    color: #fff;
-    cursor: pointer;
-    border-radius: 5px;
-    box-shadow: none;
-    height: 48px;
-    transition: all 0.3s ease;
-}
-
-.login-form .btn-primary:hover,
-.login-form .btn-primary:focus {
-    background: green;
+    font-family: "Gothic A1", sans-serif;
+    font-weight: 800;
+    font-style: normal;
 }
 
 .logo{
@@ -53,11 +16,44 @@
     width: 40px;
     margin-top: 7px;
 }
+
 .login{
-    display: flex;
-    justify-content: center;  
-    align-items: center;      
-    height: 100vh;     /*me aseguro que el contenedor ocupe todo el alto de la ventana*/
+    /*display: flex;*/
+    /* justify-content: center;  
+    align-items: center;     */
+    
+    /* max-width: 700px;  */
+    background-color: var(--fondo);
+    border-radius: 10px; /* Añade esquinas redondeadas */
+    box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Añade una sombra sutil */
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    /*height: 100vh;     /*me aseguro que el contenedor ocupe todo el alto de la ventana*/
 }
 
+.btn{
+    background: var(--colorBoton);
+    border: none;
+    transition: all 0.3s ease;
+}
 
+.btn:hover,
+.btn:focus {
+    background: var(--colorBotonHover);
+}
+
+input:focus{
+    border-color: green;
+    outline: none;
+}
+.gothic-a1-extrabold {
+    font-family: "Gothic A1", sans-serif;
+    font-weight: 800;
+    font-style: normal;
+  } 
+  
+  /* Contenido interno con ancho máximo */
+  .inner-content {
+    max-width:450px; /* Ancho máximo de 700px */
+    width: 100%;      /* Asegura que el ancho del contenido use todo el espacio disponible hasta el máximo */
+  }

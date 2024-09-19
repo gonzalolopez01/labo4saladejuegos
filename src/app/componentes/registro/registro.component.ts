@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { DataService } from '../../services/data.service';
 import { LoginsService } from '../../services/logins.service';
 
+declare var bootstrap: any;
+
 @Component({
   selector: 'app-registro',
   standalone: true,
@@ -19,6 +21,8 @@ export class RegistroComponent {
   loggedUser: string = "";
   flagError: boolean = false;
   msjError: string = "";
+  small: string ='';
+  strong: string = '';
 
   //con esta api resolvemos el manejo de los usuarios
   constructor(public auth: Auth, private router: Router, private loginsReg: LoginsService) {//instancio Auth - mas a delante vamos a usar un servicio para poder usarlo desde cualquier componente en vez de instanciar
@@ -40,22 +44,62 @@ export class RegistroComponent {
 
       switch (e.code) {
         case "auth/invalid-email":
-          this.msjError = "Email invalido";
+          //this.msjError = "Email invalido";
+          this.toastEmailInvalido();
           break;
         case "auth/email-already-in-use":
-          this.msjError = "Email ya en uso";
+          //this.msjError = "Email ya en uso";
+          //this.msjError = "Email ya en uso";          
+          this.toastEmailYaEnUso();
+          //this.showToast();
           break;
         default:
+          this.toastDefault();
           //en vez de e.code poner algo asi como que no fue posible registrarse, como generico
-          this.msjError = e.code
+          //this.msjError = e.code
           break;
       }
     });
+    
   }
-
-  //DataService
-  // enviarValor(): void {
-  //   this.dataService.setMiData(this.loggedUser); // Enviar el valor al servicio
-  // }
+  
+  toastEmailYaEnUso(){    
+    var $toast = document.getElementById("miTostada");
+    if($toast!=null){
+      console.log($toast);
+      const body = $toast.querySelector('.toast-body');
+      body!.textContent = "Email ya en uso";
+      console.log(body!.textContent);
+      var toastElement = new bootstrap.Toast($toast);
+      toastElement.show();
+    }  
+  } 
+  toastEmailInvalido(){    
+    var $toast = document.getElementById("miTostada");
+    if($toast!=null){
+      console.log($toast);
+      const body = $toast.querySelector('.toast-body');
+      body!.textContent = "Email Invalido";
+      console.log(body!.textContent);
+      var toastElement = new bootstrap.Toast($toast);
+      toastElement.show();
+    }  
+  } 
+  toastDefault(){    
+    var $toast = document.getElementById("miTostada");
+    if($toast!=null){
+      console.log($toast);
+      const body = $toast.querySelector('.toast-body');
+      body!.textContent = "No fue posible registrar la cuenta";
+      console.log(body!.textContent);
+      var toastElement = new bootstrap.Toast($toast);
+      toastElement.show();
+    }  
+  } 
+  showToast(){
+    var $toast = document.getElementById("miTostada");
+    var toastElement = new bootstrap.Toast($toast);
+    toastElement.show();
+  } 
 
 }

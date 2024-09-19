@@ -30,8 +30,7 @@ export class LoginComponent {
       //conexion/mail/contraseña
       if (res.user.email !== null) this.loggedUser = res.user.email;
 
-      //aca hacemos el ruteo al home, porque paso la res
-      console.log("logeado con exito");
+      //aca hacemos el ruteo al home, porque paso la res      
       this.loginsReg.LoginReg(this.loggedUser);
       this.loginsReg.GetDataReg();
       this.router.navigate(['../']);

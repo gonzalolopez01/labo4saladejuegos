@@ -1,24 +1,27 @@
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <h1 class="text-center text-primary">Ingresar usuario</h1>
-            <input [(ngModel)]="userMail" class="form-control my-2">
-            <input [(ngModel)]="userPWD" class="form-control my-2">
-            <div class="d-grid gap-2">
-                <!--valida si el usuarios esta logeado o si el email existe y asi muestra boton iniciar sesion o cerrar sesion -->
-                @if (auth.currentUser?.email){
-                    <button (click)="CloseSession()" class="btn btn-primary">Cerrar sesión</button>
-                } @else{
-                    <button (click)="Login()" class="btn btn-primary">Login</button>
-                }
+<!-- <div class="row"> -->
+    <div class="d-flex justify-content-center">
+        <!-- <div class="login row mt-5"> -->
+        <div class="row login inner-content">
+            <!-- <div class="d-flex justify-content-center"> -->
+            <div class="col">
+                <div>
+                    <div class="container d-flex justify-content-between mt-5 mb-4">
+                        <h2 class="text-left texto-blanco">Ingresar usuario</h2>
+                        <img src="assets/img/logo.png" class="img-fluid" alt="logo" class="logo">
+                    </div>
+                    <div class="d-grid gap-3">
+                        <div>                
+                            <input [(ngModel)]="userMail" class="form-control my-2" placeholder="Usuario - Email">
+                        </div>
+                        <div>
+                            <input [(ngModel)]="userPWD" class="form-control my-2" required placeholder="Contraseña">
+                        </div>
+                        <div >                
+                            <button (click)="Login()" class="btn form-control mb-5 texto-blanco">Login</button>
+                        </div>                            
+                    </div>
+                </div>
             </div>
-            <!-- muestra el email si esta logeado -->
-            @if (auth.currentUser?.email){
-                <h2 class="text-center text-primary">Usuario logueado: {{auth.currentUser?.email}}</h2>
-                <!-- en auth con currentUser? nos guarda la info de la sesion que tenemos iniciada -->
-                <!-- auth.currentUser?. tiene otras opciones aparte de email -->
-                 <!-- update curretn user si queremos cambiar sesion -->
-            }
         </div>
     </div>
-</div>
+<!-- </div> -->

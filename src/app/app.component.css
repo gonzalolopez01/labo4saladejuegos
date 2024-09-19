@@ -1,7 +1,5 @@
 /* app.component.css */
-:root{
-  --colorFondo: rgb(187, 187, 187);
-}
+
 :host {/*le aplico estilo al contenedor del componente*/
     display: block;
     min-height: 100vh; /* Ocupa toda la altura de la ventana */
@@ -9,11 +7,14 @@
     margin: 0; /* Elimina márgenes predeterminados */    
     width: 100%;
   }
+:root{
+  --colorFondo: rgb(187, 187, 187);
+}
   
 .container {
   display: flex;
   justify-content: center; 
   align-items: center; 
-  height: 100%;  
+  min-height: 100%;  
   
 }
