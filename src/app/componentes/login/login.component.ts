@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Usuario } from '../../clases/usuario';
@@ -16,10 +16,11 @@ declare var bootstrap: any;
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent {
+export class LoginComponent implements OnDestroy {
 
   constructor(private router: Router, public auth: Auth, private loginsReg: LoginsService){
   }
+  
   title = 'Login';
 
   userMail: string = "";
@@ -100,5 +101,8 @@ export class LoginComponent {
   AccesoRapido() {
     this.userMail = "lolo@gmail.com";
     this.userPWD = "123321";
+  }
+  ngOnDestroy(): void {
+    console.log("chau");
   }
 }

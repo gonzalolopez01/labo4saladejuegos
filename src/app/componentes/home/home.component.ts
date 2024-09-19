@@ -11,7 +11,7 @@ import { Auth, signOut } from '@angular/fire/auth';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent implements OnInit{
+export class HomeComponent implements OnInit {
   
   isUserLoggedIn: boolean = true;
   usuario = '';
@@ -28,6 +28,7 @@ export class HomeComponent implements OnInit{
     this.dataService.miData$.subscribe((nuevoTexto) => {
       this.usuario = nuevoTexto; // Actualizar el valor de texto cuando cambie miData      
     });
+    
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.isChildActive = event.url !== '/home';
