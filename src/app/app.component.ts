@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { Usuario } from './clases/usuario';
+import { BrowserModule } from '@angular/platform-browser';
+import { JuegosModule } from './modules/juegos/juegos.module';
 
 @Component({
   selector: 'app-root',
   standalone: true,
+  // imports: [RouterOutlet, JuegosModule, BrowserModule],
   imports: [RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'

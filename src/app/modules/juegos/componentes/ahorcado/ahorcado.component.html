@@ -1,1 +1,33 @@
-<p>ahorcado works!</p>
+<!-- <div class="container d-flex flex-column justify-content-center align-items-center min-vh-100 bg-white"> -->
+<div class="container d-flex flex-column justify-content-center align-items-center bg-white">
+    <div class="divPrincipal">
+        <div class="ahorcado">
+            <img class="imagen" [src]="imagenes[index]" alt="ahorcado" />
+        </div>
+        <div class="container d-flex flex-column justify-content-center align-items-center mt-5 mb-5" id="palabra">
+            <div class="palabraIncompleta">
+                <span *ngFor="let char of palabraIncompleta">
+                {{char}}
+                </span>
+            </div>
+        </div>
+    </div>
+   
+    <div class="container d-flex flex-column justify-content-center align-items-center bg-white mb-5 activo" id="teclado">                
+        <div class="mt-3" id="teclado1">
+
+        </div>
+        <div class="mt-3" id="teclado2">
+
+        </div>        
+    </div>
+    <div class="mt-3" id="botonJugar">
+        <button (click)="jugar()" class="btn btn-primary">Jugar</button>
+    </div>
+    <div class="mt-3 row justify-content-center" *ngIf="index == 6 || ganaste == true" >
+        
+            <p class="text-center">{{mensaje}}</p>
+            <button (click)="jugar()" class="btn btn-primary">Reiniciar</button>
+        
+    </div>
+</div>

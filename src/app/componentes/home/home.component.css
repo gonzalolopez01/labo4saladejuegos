@@ -33,6 +33,10 @@ nav{
     font-weight: 400;
     font-style: normal;
 }
+.boton{
+    width: 70px;
+    height: 40px;
+}
 
 
 /*card*/
@@ -60,4 +64,16 @@ nav{
     height: 60%; /* Mantiene la proporción de la imagen */
     /*height: auto; /* Mantiene la proporción de la imagen */
 }
+
+/* chat */
+.contenedor-chat {
+    width: 300px;  /* Ancho fijo */
+    height: auto; /* Altura fija */
+     background-color: #155724;  
+    /* color: white;   */
+    border: 2px solid #155724;  
+    border-radius: 8px;     /* Bordes redondeados (opcional) */
+    color: white;
+    margin-right: 15px;
+  }
 
