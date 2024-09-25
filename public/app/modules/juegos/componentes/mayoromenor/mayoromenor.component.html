@@ -1,1 +1,60 @@
-<p>mayoromenor works!</p>
+<!-- <div class="container d-flex flex-column justify-content-center align-items-center min-vh-100 bg-white"> -->
+<div class="container d-flex flex-column justify-content-center align-items-center bg-white">
+    <h1>MAYOR O MENOR</h1>
+    @if(!jugando){
+        <h2>Mayor o menor</h2>
+        <button (click)="comenzar()" id="jugar" class="btn btn-success mb-5">Comenzar</button>
+    }@else{
+        <!-- position-relative, hace que un elemento hijo con posicion absoluta se coloce de esa mannera sobre el padre -->
+        <div class="d-flex position-relative justify-content-center mx-4">
+            <div class="contenedor-fijo d-flex flex-column justify-content-center align-items-center mx-3">
+                <h3 class="silkscreen-regular">Carta Anterior:</h3>
+                @if(cartaAnterior){
+                    <!-- <img *ngIf="cartaActual" [src]="cartaActual?.image" alt="Carta actual" class="imagen" /> -->
+                    <img [src]="cartaAnterior.image" alt="Carta actual" class="imagen" />
+                }
+            </div>
+            <!-- <div class="d-flex flex-column justify-content-center align-items-center mx-4"> -->
+            <div class="contenedor-fijo d-flex flex-column justify-content-center align-items-center mx-3">
+                <h3 class="silkscreen-regular">Carta actual:</h3>
+                @if(cartaActual){
+                    <!-- <img *ngIf="cartaActual" [src]="cartaActual?.image" alt="Carta actual" class="imagen" /> -->
+                    <img [src]="cartaActual.image" alt="Carta actual" class="imagen" />
+                }
+            </div>
+            <div *ngIf="estado" class="mensaje elemento-centro" [ngClass]="{'correcto': estado === 'correcto', 'incorrecto': estado === 'incorrecto'}">
+                <p class="silkscreen-regular">{{estado === 'correcto' ? 'Correcto!!!' : 'Incorrecto, perdiste!!!'}}</p>
+            </div>  
+        </div>      
+          
+        @if(cargo && !perdiste){
+            <div class="d-flex mt-5 mb-5">
+                <div class="mx-3">
+                    <button (click)="valor = true; pedirCarta();"  class="btn btn-success">Mayor</button>
+                </div>
+                <div class="mx-3">
+                    <button (click)="valor = false; pedirCarta();"  class="btn btn-success">Menor</button>
+                </div>            
+            </div>  
+        }
+        @if(perdiste){
+            <div class="mx-3 mt-5 mb-5">
+                <button (click)="valor = false; restart();"  class="btn btn-success">Restart???</button>
+            </div>            
+        }
+                  
+            
+    }
+</div>
+
+<!-- <div *ngIf="loading" class="spinner-container"> -->
+    <!-- Spinner de Bootstrap o cualquier otro estilo que prefieras -->
+    <!-- <div class="spinner-border text-primary" role="status">
+      <span class="sr-only">Cargando...</span>
+    </div>
+  </div> -->
+  
+<!-- <div *ngIf="!loading"> -->
+<!-- Aquí iría el contenido cuando las cartas estén cargadas -->
+<!-- <p>Mazo: {{mazo}}</p>
+</div> -->

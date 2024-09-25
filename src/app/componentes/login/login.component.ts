@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule, NgModel } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Usuario } from '../../clases/usuario';
@@ -16,17 +16,31 @@ declare var bootstrap: any;
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent implements OnDestroy {
+export class LoginComponent implements OnInit {
 
-  constructor(private router: Router, public auth: Auth, private loginsReg: LoginsService){
-  }
-  
   title = 'Login';
 
   userMail: string = "";
   userPWD: string = "";
 
   loggedUser: string = "";  
+  cargando = true;
+
+  constructor(private router: Router, public auth: Auth, private loginsReg: LoginsService){
+    
+      // Simular una tarea asíncrona
+      setTimeout(() => {
+        this.cargando = false; // Cuando termine la tarea, ocultar el spinner
+      }, 2000);
+
+  }
+    
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.cargando = false; // Después de 3 segundos, ocultamos el spinner
+    }, 3000);
+  }
+
 
   Login() {
     signInWithEmailAndPassword(this.auth, this.userMail, this.userPWD).then((res) => {
@@ -50,6 +64,9 @@ export class LoginComponent implements OnDestroy {
           break;
         case "auth/email-already-in-use":
           
+          break;
+        case "auth/invalid-email":
+          this.toastEmail();
           break;
         default:
           this.toastDefault();
@@ -87,6 +104,18 @@ export class LoginComponent implements OnDestroy {
       toastElement.show();
     }  
   } 
+  toastEmail(){    
+    var $toast = document.getElementById("miTostada");
+    if($toast!=null){
+      console.log($toast);
+      const body = $toast.querySelector('.toast-body');
+      body!.textContent = "El usuario debe ser de tipo e-mal";
+      console.log(body!.textContent);
+      var toastElement = new bootstrap.Toast($toast);
+      toastElement.show();
+    }  
+  } 
+ 
   toastDefault(){    
     var $toast = document.getElementById("miTostada");
     if($toast!=null){
@@ -102,7 +131,5 @@ export class LoginComponent implements OnDestroy {
     this.userMail = "lolo@gmail.com";
     this.userPWD = "123321";
   }
-  ngOnDestroy(): void {
-    console.log("chau");
-  }
+  
 }

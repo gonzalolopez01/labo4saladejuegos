@@ -4,8 +4,10 @@ div{
     --colorBoton: rgb(112, 230, 112);
     --colorBotonHover:green;
 }
+
 nav{
     background-color: var(--fondo);
+    height: 80px;
 }
 
 .div-botones{
@@ -39,6 +41,7 @@ nav{
 }
 
 
+
 /*card*/
 .div-card{
     display: flex;
@@ -69,11 +72,27 @@ nav{
 .contenedor-chat {
     width: 300px;  /* Ancho fijo */
     height: auto; /* Altura fija */
-     background-color: #155724;  
+     /* background-color: #155724;   */
+    background-color: var(--fondo);
     /* color: white;   */
-    border: 2px solid #155724;  
-    border-radius: 8px;     /* Bordes redondeados (opcional) */
+    /* border: 2px solid #155724;   */
+    /* border-radius: 8px;     Bordes redondeados (opcional) */
     color: white;
-    margin-right: 15px;
+    /* margin-right: 15px; */
+    
+    /* opacity: 0; */
+    /*transform: translateY(-20px);*/ /* Efecto de desplazamiento hacia arriba */
+    /*transition: opacity 0.5s ease, transform 0.5s ease;*/ /* Animación suave */
+    /*visibility: hidden; *//* Oculta el div para que no ocupe espacio cuando no se ve */
+}
+/* .contenedor-chat.visible {
+    opacity: 1;
+    transform: translateY(0); 
+    visibility: visible; 
   }
+  .contenedor-chat.hidden {
+    opacity: 0;
+    transform: translateY(-20px);
+    visibility: hidden;
+  } */
 

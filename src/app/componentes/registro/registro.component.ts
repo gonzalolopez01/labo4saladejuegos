@@ -53,6 +53,9 @@ export class RegistroComponent {
           this.toastEmailYaEnUso();
           //this.showToast();
           break;
+        case "auth/weak-password":
+          this.toastPassword();
+          break;          
         default:
           this.toastDefault();
           //en vez de e.code poner algo asi como que no fue posible registrarse, como generico
@@ -79,7 +82,18 @@ export class RegistroComponent {
     if($toast!=null){
       console.log($toast);
       const body = $toast.querySelector('.toast-body');
-      body!.textContent = "Email Invalido";
+      body!.textContent = "El usuario debe ser un Email";
+      console.log(body!.textContent);
+      var toastElement = new bootstrap.Toast($toast);
+      toastElement.show();
+    }  
+  } 
+  toastPassword(){    
+    var $toast = document.getElementById("miTostada");
+    if($toast!=null){
+      console.log($toast);
+      const body = $toast.querySelector('.toast-body');
+      body!.textContent = "El password debe tener al menos 6 caracteres";
       console.log(body!.textContent);
       var toastElement = new bootstrap.Toast($toast);
       toastElement.show();

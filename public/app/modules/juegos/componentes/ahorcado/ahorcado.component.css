@@ -1,0 +1,27 @@
+.container-fluid{
+    max-width: 800px;
+}
+.imagen{
+    max-width: 300px;
+    height: auto;
+}
+
+.palabraIncompleta{    
+    font-family: "Gothic A1", sans-serif;
+    font-weight: 800;
+    font-style: normal;
+}
+.btn{
+    background: rgb(112, 230, 112);
+    border: none;
+    transition: all 0.3s ease;    
+    margin-bottom: 20px;
+}
+.inactivo {
+    pointer-events: none;  /* Deshabilita la interacción */
+    opacity: 0.7;          /* Opcional: Cambia la opacidad para dar una señal visual */
+  }
+  .activo {
+    pointer-events: all;  /* Deshabilita la interacción */
+    opacity: 0.7;          /* Opcional: Cambia la opacidad para dar una señal visual */
+  }

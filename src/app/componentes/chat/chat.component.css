@@ -1,27 +1,69 @@
-.chat-container {
+/* .chat-container {
     border: 1px solid #ccc;
     padding: 10px;
     max-width: 600px;
     margin: 0 auto;
-  }
-  
-  .mensaje {
-    max-height: 400px;
-    overflow-y: auto;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    padding: 10px;
-  }
-  
-  .chat-input {
+    
+    height: 100vh; 
+    width: 100%; 
     display: flex;
+    flex-direction: column;
   }
+
   
-  .chat-input input {
-    flex: 1;
-    padding: 5px;
-  }
-  
-  .chat-input button {
-    padding: 5px 10px;
-  }
+.mensaje {
+  flex-grow: 1; 
+  overflow-y: auto; 
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  padding: 10px;  
+}
+
+.chat-input {
+  display: flex;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 5px;
+}
+
+.chat-input button {
+  padding: 5px 10px;
+} */
+
+/*********/
+.chat-container {
+  height: calc(100vh - 80px); /* Altura total menos la altura del navbar */
+  /*height: 100vh; *//* Ocupará todo el alto de la ventana */
+  display: flex;
+  flex-direction: column;
+}
+
+.mensajes {
+  flex-grow: 1; /* Ocupar todo el espacio restante */
+  overflow-y: auto; /* Permitir scroll cuando los mensajes exceden el espacio */
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc; /* Borde opcional para visualizar los mensajes */
+  display: flex;
+  flex-direction: column-reverse; /* Invertir el orden de los mensajes */
+}
+
+.chat-input {
+  width: 100%; /* Ocupar el ancho completo */
+  padding: 10px;
+  border-top: 1px solid #ccc; /* Borde superior */
+  display: flex;
+  margin-top: auto; /* Empujar el input al fondo del contenedor */
+}
+
+.chat-input input {
+  flex: 1; /* El input ocupará todo el espacio posible */
+  padding: 5px;
+}
+
+.chat-input button {
+  padding: 5px 10px;
+  margin-left: 5px;
+}

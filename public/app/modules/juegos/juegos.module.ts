@@ -3,33 +3,26 @@ import { CommonModule } from '@angular/common';
 
 import { JuegosRoutingModule } from './juegos-routing.module';
 import { AhorcadoComponent } from './componentes/ahorcado/ahorcado.component';
-import { MayorOmenorComponent } from '../../../../public/app/componentes/mayor-omenor/mayor-omenor.component';
+import { MayoromenorComponent } from './componentes/mayoromenor/mayoromenor.component';
 import { PreguntadosComponent } from './componentes/preguntados/preguntados.component';
-import { QuienSoyComponent } from '../../../../public/app/componentes/quien-soy/quien-soy.component';
-import { ChatComponent } from './componentes/chat/chat.component';
-
-
-
-
+import { QuiensoyComponent } from './componentes/quiensoy/quiensoy.component';
 
 @NgModule({
   declarations: [
     AhorcadoComponent,
-    MayorOmenorComponent,
+    MayoromenorComponent,
     PreguntadosComponent,
-    QuienSoyComponent,
-    ChatComponent
+    QuiensoyComponent    
   ],
-  imports: [
-    CommonModule,
+  imports: [    
+    CommonModule,    
     JuegosRoutingModule
   ],
   exports: [
     AhorcadoComponent,
-    MayorOmenorComponent,
+    MayoromenorComponent,
     PreguntadosComponent,
-    QuienSoyComponent,
-    ChatComponent
+    QuiensoyComponent    
   ]
 
 })

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { addDoc, collection, collectionData, Firestore, orderBy, query, where } from '@angular/fire/firestore';
-import { Observable, Subject, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, Subscription } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,9 @@ export class LoginsService {
   public countLogins:number = 0;
   private sub!:Subscription;
 
-  private chatsSubject = new Subject<any[]>(); // Creamos un Subject para emitir los datos del chat
+  
+  private chatsSubject = new BehaviorSubject<any[]>([]); //con behabiorSubject - este requiere un valor inicial, le paso un aray vacio
+  //private chatsSubject = new Subject<any[]>(); // Creamos un Subject para emitir los datos del chat
   public chats$: Observable<any[]> = this.chatsSubject.asObservable(); // Exponemos el Subject como observable, a esto nos suscribimos en otro componente
   private subChat!:Subscription;
 
@@ -66,7 +68,7 @@ export class LoginsService {
     let fecha =  new Date();
     const filteredQuery = query(//armamos la query para indicar que es lo que vamos a buscar
       col      
-      //,where('fecha','>=',fecha) 
+      ,where('fecha','>=',fecha) 
       //,limit(2) //que traiga solo 2
       ,orderBy("fecha", "desc")
     );
