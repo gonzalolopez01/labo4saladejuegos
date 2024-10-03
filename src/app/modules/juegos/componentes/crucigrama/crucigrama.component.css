@@ -1,0 +1,56 @@
+.tablero {
+    display: grid;
+    grid-template-columns: repeat(15, 40px);
+    grid-gap: 2px;
+    margin-bottom: 20px;
+  }
+  
+  .fila {
+    display: contents;
+  }
+  
+  .casilla {
+    width: 40px;
+    height: 40px;
+  }
+  
+  input {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    font-size: 18px;
+  }
+  
+  .casilla-vacia {
+    width: 40px;
+    height: 40px;
+    background-color: #f0f0f0;
+  }
+
+  /* MArco*/
+  .position-relative {
+    position: relative;
+}
+
+.container{    
+    /* min-height: 600px; */
+    /* height: 100%; */
+   
+    max-width: 100%;  /* Ocupa todo el ancho */
+    height: 100%; /* Ocupa todo el alto */
+    padding: 0%;
+    margin-left: 0%;
+    margin-right: 0%;
+    border: 2px solid #155724;
+    border-radius: 8px;       
+    background-image: url(../../../../../assets/fondoPreguntados.jpg);
+    background-size: cover; 
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.contenedorJuego {
+    position: relative;
+    width: 100%;    
+    height: calc(100vh - 150px);
+     
+}

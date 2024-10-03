@@ -26,10 +26,15 @@ export class AhorcadoComponent  implements OnInit{
   index = 0;  
   mensaje = '';
   ganaste = false;
+  cargando = true;
   // $boton = document.getElementById('botonJugar');
 
   constructor() {
-    this.teclado= 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');    
+    this.teclado= 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');   
+    
+    setTimeout(() => {
+      this.cargando = false; // Cuando termine la tarea, ocultar el spinner
+    }, 2000); 
   }
   ngOnInit(): void {
     //this.generarTeclado();
@@ -94,7 +99,7 @@ export class AhorcadoComponent  implements OnInit{
         }
       }      
       if(this.esGanador()){
-        this.mensaje = "sos un capo, ganaste";
+        this.mensaje = "Sos un capo, ganaste!!!";
         this.deshabilitarTeclado();
         this.ganaste=true;
         return;
@@ -103,7 +108,7 @@ export class AhorcadoComponent  implements OnInit{
     else{
       this.index++;
       if(this.index === 6){   
-        this.mensaje = "Sos malisimo, las palabras son mas faciles que tu mamá. Perdiste.";  
+        this.mensaje = "Perdiste!!!";  
         this.deshabilitarTeclado();     
         return;
       }

@@ -14,6 +14,7 @@ export class LoginsService {
   
   private chatsSubject = new BehaviorSubject<any[]>([]); //con behabiorSubject - este requiere un valor inicial, le paso un aray vacio
   //private chatsSubject = new Subject<any[]>(); // Creamos un Subject para emitir los datos del chat
+
   public chats$: Observable<any[]> = this.chatsSubject.asObservable(); // Exponemos el Subject como observable, a esto nos suscribimos en otro componente
   private subChat!:Subscription;
 
@@ -54,6 +55,9 @@ export class LoginsService {
       console.log(respuesta);      
     })
   }
+
+
+  //CHAT
   escribirChat(user:string, texto:string) {//ESCRITURA
     let col = collection(this.firestore, 'chat');//con collection instanciamos la collection de firebase
 

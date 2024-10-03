@@ -68,7 +68,7 @@ export class LoginsService {
     let fecha =  new Date();
     const filteredQuery = query(//armamos la query para indicar que es lo que vamos a buscar
       col      
-      //,where('fecha','>=',fecha) 
+      ,where('fecha','>=',fecha) 
       //,limit(2) //que traiga solo 2
       ,orderBy("fecha", "desc")
     );

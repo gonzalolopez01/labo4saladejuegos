@@ -27,12 +27,26 @@ export class MayoromenorComponent implements OnInit{
   estado: string | null = null;
 
   perdiste = false;
-  
 
-  constructor(private cartasService: CartasService){}
+  puntaje = 0;
+
+  cargandoCarta = false;
+
+  cargandoJuego = true;
+
+  $botonMayor:  HTMLButtonElement | null = null;
+  $botonMenor:  HTMLButtonElement | null = null;
+  
+  constructor(private cartasService: CartasService){
+    setTimeout(() => {
+      this.cargandoJuego = false; // Cuando termine la tarea, ocultar el spinner
+    }, 2000); 
+    
+  }
 
   ngOnInit(): void {  
-    this.obtenerMazo();    
+    this.obtenerMazo();       
+    
   }
   obtenerMazo(){
     this.cargando = true; //controlo spinner
@@ -44,7 +58,7 @@ export class MayoromenorComponent implements OnInit{
         console.log('deck id: ', this.idMazo);
         if(this.jugando){
           this.pedirCarta();
-        }
+        }        
       },
       error => {
         console.error('Error al cargar las cartas', error);
@@ -52,28 +66,35 @@ export class MayoromenorComponent implements OnInit{
         this.cargando = false; // oculto spinner
       });
   }
-  pedirCarta(){    
+  pedirCarta(){        
+    this.cargandoCarta = true;
+    //this.desactivarBotones();
     this.cartasService.getCarta(this.idMazo).subscribe(
       (response: any) => {
         // Verificar si la respuesta tiene cartas
         if (response && response.cards && response.cards.length > 0) {
-          const carta = response.cards[0];                         
+          const carta = response.cards[0];           
+          let valor = this.formatearValor(carta.value);                         
           const cartaProcesada = {
             //image: carta.images.png, // Usamos la imagen 'png'
-            image: carta.image,
-            value: this.formatearValor(carta.value),
+            image: carta.image,            
+            value: valor,
             suit: carta.suit
           };            
           this.cartaPedida = cartaProcesada;  
+          
           if(this.primeraVuelta){          //primera vuelta  
             this.primeraVuelta = false;
+            this.cargandoCarta = false;           
           }else{
-            this.comparar()//comparo carta actual con carta pedida
+            this.cargandoCarta = false;
+            this.comparar();//comparo carta actual con carta pedida            
           }
           this.acomodadorCartas(this.cartaPedida);  
         }
       },
       error => {
+        this.cargandoCarta= false;
         console.error('Error al obtener la carta:', error);
       }
     );
@@ -86,25 +107,31 @@ export class MayoromenorComponent implements OnInit{
   
   comparar(){    
     if(this.cartaPedida!.value != this.cartaActual!.value){
+      let cartaPedida = Number(this.cartaPedida!.value);
+      let cartaActual = Number(this.cartaActual!.value);
       if(this.valor == true){//mayor
-        if(this.cartaPedida!.value > this.cartaActual!.value){
-          console.log('anterior: ',this.cartaActual?.value, ' actual: ',this.cartaPedida?.value);
+        //if(this.cartaPedida!.value > this.cartaActual!.value){
+        if(cartaPedida > cartaActual){  
+          console.log('anterior: ',cartaActual, ' actual: ',cartaPedida);
           console.log('eligio mayor ---> bien');   
           this.mostrarMensaje('correcto');
+          this.puntaje++;
         }else{
-          console.log('anterior: ',this.cartaActual?.value, ' actual: ',this.cartaPedida?.value);
+          console.log('anterior: ',cartaActual, ' actual: ',cartaPedida);
           console.log('eligio mayor ---> mal');   
           this.mostrarMensaje('incorrecto');
           this.perdiste = true;
           this.cargo = false;
         }   
       }else{//menor
-        if(this.cartaPedida!.value < this.cartaActual!.value){
-          console.log('anterior: ',this.cartaActual?.value, 'actual',this.cartaPedida?.value);
+        //if(this.cartaPedida!.value < this.cartaActual!.value){
+        if(cartaPedida < cartaActual){
+          console.log('anterior: ',cartaActual, 'actual',cartaPedida);
           console.log('eligio menor ---> bien');
           this.mostrarMensaje('correcto');
+          this.puntaje++;
         }else{
-          console.log('anterior: ',this.cartaActual?.value, ' actual: ',this.cartaPedida?.value);
+          console.log('anterior: ',cartaActual, ' actual: ',cartaPedida);
           console.log('eligio menor ---> mal');
           this.mostrarMensaje('incorrecto');
           this.perdiste = true;
@@ -122,17 +149,17 @@ export class MayoromenorComponent implements OnInit{
       this.cartaActual = carta;
     }else {
       this.cartaActual = carta;
-    }
+    }    
   }
   formatearValor(valor:string){
     switch(valor){
-      case 'J': 
+      case 'JACK': 
        return '11';
-      case 'Q':
+      case 'QUEEN':
         return '12';
-      case 'K':
+      case 'KING':
         return '13';
-      case 'A':
+      case 'ACE':
        return '14';
        default:
         return valor;
@@ -156,6 +183,23 @@ export class MayoromenorComponent implements OnInit{
     this.cartaPedida = null;
     this.cartaActual = null;
     this.cartaAnterior = null;
+    this.puntaje = 0;
     this.obtenerMazo();    
   }
+  // desactivarBotones(){
+  //   this.$botonMayor!.disabled = true;
+  //   this.$botonMenor!.disabled = true;
+  // }  
+  // activarBotones(){
+  //   this.$botonMayor!.disabled = false;
+  //   this.$botonMenor!.disabled = false;
+  // }  
+  // pulsarBotonDesactivar(){
+  //   this.$botonMayor = document.getElementById('botonMayor') as HTMLButtonElement;
+  //   this.$botonMenor = document.getElementById('botonMenor') as HTMLButtonElement;
+  //   console.log('boton: ',this.$botonMayor);    
+  //   if(this.$botonMayor != null){
+
+  //   }
+  // }
 }

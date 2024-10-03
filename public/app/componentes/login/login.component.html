@@ -1,31 +1,41 @@
 <!-- <div class="row"> -->
-    <div class="d-flex justify-content-center">
-        <!-- <div class="login row mt-5"> -->
-        <div class="row login inner-content">
-            <!-- <div class="d-flex justify-content-center"> -->
-            <div class="col">
-                <div>
-                    <div class="container d-flex justify-content-between mt-5 mb-4">
-                        <h2 class="text-left texto-blanco">Ingresar usuario</h2>
-                        <img src="assets/img/logo.png" class="img-fluid" alt="logo" class="logo">
-                    </div>
-                    <div class="d-grid gap-3">
-                        <div>                
-                            <input [(ngModel)]="userMail" class="form-control my-2" placeholder="Usuario - Email">
-                        </div>
+    <div class="contenedor position-relative">
+        <!-- <div *ngIf="!auth.currentUser?.email; else elseBlock">  -->
+        <div *ngIf="cargando; else elseBlock;" class="spinner-overlay">
+            <div class="spinner-border text-succes" role="status">
+                <span class="visually-hidden">Cargando...</span>
+            </div>
+        </div>
+        <ng-template #elseBlock>
+            <div class="d-flex justify-content-center">
+                <!-- <div class="login row mt-5"> -->
+                <div class="row login inner-content">
+                    <!-- <div class="d-flex justify-content-center"> -->
+                    <div class="col">
                         <div>
-                            <input [(ngModel)]="userPWD" class="form-control my-2" required placeholder="Contraseña">
+                            <div class="container d-flex justify-content-between mt-5 mb-4">
+                                <h2 class="text-left texto-blanco">Ingresar usuario</h2>
+                                <img src="assets/img/logo.png" class="img-fluid" alt="logo" class="logo">
+                            </div>
+                            <div class="d-grid gap-3">
+                                <div>                
+                                    <input [(ngModel)]="userMail" class="form-control my-2" placeholder="Usuario - Email" type="email" required>
+                                </div>
+                                <div>
+                                    <input [(ngModel)]="userPWD" class="form-control my-2" required placeholder="Contraseña" type="password">
+                                </div>
+                                <div >                
+                                    <button (click)="Login()" class="btn form-control mb-5 texto-blanco">Login</button>
+                                </div>      
+                                <div >                
+                                    <button (click)="AccesoRapido()" class="btn form-control mb-5 texto-blanco">Acceso Rapido</button>
+                                </div>                       
+                            </div>
                         </div>
-                        <div >                
-                            <button (click)="Login()" class="btn form-control mb-5 texto-blanco">Login</button>
-                        </div>      
-                        <div >                
-                            <button (click)="AccesoRapido()" class="btn form-control mb-5 texto-blanco">Acceso Rapido</button>
-                        </div>                       
                     </div>
                 </div>
             </div>
-        </div>
+        </ng-template>
     </div>
 <!-- </div> -->
 <div class="toast" id= "miTostada" role="alert" aria-live="assertive" aria-atomic="true" style="position: absolute; top: 20px; right:20px;">

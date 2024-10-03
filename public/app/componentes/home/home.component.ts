@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../services/data.service';
-import { NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
+import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { Auth, signOut } from '@angular/fire/auth';
 import { ChatComponent } from '../chat/chat.component';
 
@@ -22,8 +22,20 @@ export class HomeComponent implements OnInit {
 
   isChildActive: boolean = false;
   chat = false;
+  cargando = false;
 
-  constructor(private dataService: DataService, public auth: Auth, private router: Router){  }
+  constructor(private dataService: DataService, public auth: Auth, private router: Router){  
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationStart) {        
+          // Muestra el spinner cuando empieza la navegación
+                    
+          this.cargando = true;                  
+      } else if (event instanceof NavigationEnd || event instanceof NavigationCancel || event instanceof NavigationError) {
+        // Oculta el spinner cuando termina la navegación
+        this.cargando = false;
+      }
+    });
+  }
 
   ngOnInit(): void {
     // Nos suscribimos al observable miData$ del servicio
@@ -50,11 +62,12 @@ export class HomeComponent implements OnInit {
     //}).catch
     })
   } 
+
+
   abrirChat(){
-    if(this.chat == false){
-      this.chat = true;
-    }else{
-      this.chat = false;
-    }
+    this.chat = !this.chat;
+  }
+  toggleChat() {
+    this.chat = !this.chat;
   }
 }

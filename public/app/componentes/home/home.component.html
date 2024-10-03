@@ -10,37 +10,41 @@
                 
             </div>
             
-            <div>
-                <div>
-                    <ng-container *ngIf="!auth.currentUser?.email; else elseBlock">  
-                        <div class="div-botones d-flex">
-                            <div>
-                                <button class="btn btn-primary texto-blanco silkscreen-regular" type="button" [routerLink]="'./login'">Login</button>
-                            </div>
-                            <div>
-                                <button class="btn btn-primary texto-blanco silkscreen-regular" type="button" [routerLink]="'./registro'">Resgistrarse</button>            
-                            </div>                      
+            <div>            
+                <!-- <ng-container *ngIf="!auth.currentUser?.email; else elseBlock">   -->
+                <div *ngIf="!auth.currentUser?.email; else elseBlock;">  
+                    <div class="div-botones d-flex">
+                        <div>
+                            <button class="btn btn-primary texto-blanco silkscreen-regular" type="button" [routerLink]="'./login'">Login</button>
                         </div>
-                    </ng-container>
+                        <div>
+                            <button class="btn btn-primary texto-blanco silkscreen-regular" type="button" [routerLink]="'./registro'">Resgistrarse</button>            
+                        </div>                      
+                    </div>
                 </div>
-                <div>
-                    <ng-template #elseBlock>       
-                        <div class="div-botones d-flex">
-                            <!-- <button class="btn btn-primary " type="button" [routerLink]="'./login'">Logout</button> -->
-                            <p class="mt-2 text-center texto-blanco">Usuario: {{auth.currentUser?.email}}</p>
-                            <button (click)="CloseSession()" class="boton btn texto-blanco mx-2 mt-3">Logout</button>                 
-                            <button (click)="abrirChat()" class="boton btn texto-blanco mx-2 mt-1" style="position: absolute; top: 20px; right:20px;">Chat</button>
-                        </div>     
-                    </ng-template>                
-                </div>
+                <!-- </ng-container>                             -->
+                <ng-template #elseBlock>       
+                    <div class="div-botones d-flex">
+                        <!-- <button class="btn btn-primary " type="button" [routerLink]="'./login'">Logout</button> -->
+                        <p class="mt-2 text-center texto-blanco">Usuario: {{auth.currentUser?.email}}</p>
+                        <button (click)="CloseSession()" class="boton btn texto-blanco mx-2 mt-3">Logout</button>                 
+                        <button (click)="abrirChat()" class="boton btn texto-blanco mx-2 mt-3">Chat</button>
+                    </div>     
+                </ng-template>                                
             </div>
         </div>   
     </nav>
 </div>
 <div class="container-fluid overflow-hidden">
     <div class="row">
-        <div class="contenedor-home col mt-3">
-            <div>
+        <div class="col mt-3">
+            <div *ngIf="cargando" class="d-flex justify-content-center align-items-center" style="position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(255, 255, 255, 0.8); z-index: 1000;">
+                <div class="spinner-border text-primary" role="status">
+                  <span class="visually-hidden">Cargando...</span>
+                </div>
+            </div>       
+            
+            <div *ngIf="isChildActive && !cargando">
                 <router-outlet />
             </div>  
 
@@ -106,11 +110,18 @@
                 </div>
             </div>
         </div>
+        <!-- <div class="contenedor-chat col-3" [ngClass]="{'visible': chat, 'hidden': !chat}">
+            <app-chat></app-chat>
+        </div> -->
         @if (chat) {
-            <div class="contenedor-chat col-3 mt-3">
+            <div class="contenedor-chat col-3">
                 <app-chat></app-chat>
             </div>
         }
+        <!-- otra forma de hacerlo
+        <div class="contenedor-chat col-3" [class.visible]="chat">
+            <app-chat></app-chat>
+        </div> -->
     </div>
 </div>
 

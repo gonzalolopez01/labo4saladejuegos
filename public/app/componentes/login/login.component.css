@@ -50,10 +50,34 @@ input:focus{
     font-family: "Gothic A1", sans-serif;
     font-weight: 800;
     font-style: normal;
-  } 
+} 
   
-  /* Contenido interno con ancho máximo */
-  .inner-content {
-    max-width:450px; /* Ancho máximo de 700px */
-    width: 100%;      /* Asegura que el ancho del contenido use todo el espacio disponible hasta el máximo */
+/* Contenido interno con ancho máximo */
+.inner-content {
+max-width:450px; /* Ancho máximo de 700px */
+width: 100%;      /* Asegura que el ancho del contenido use todo el espacio disponible hasta el máximo */
+}
+
+
+/*contenedor de spinnr y login*/
+.spinner-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000; /* Superpón al contenido debajo */
+    /* background: rgba(255, 255, 255, 0.8);  */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+  
+  /* Estilo de contenedor para asegurarse de que el contenido debajo no cambie de tamaño */
+  .contenedor {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 150px);
+    
   }
