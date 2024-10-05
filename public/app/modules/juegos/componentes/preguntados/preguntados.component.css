@@ -1,0 +1,107 @@
+.position-relative {
+    position: relative;
+}
+.container{    
+    /* min-height: 600px; */
+    /* height: 100%; */
+   
+    max-width: 100%;  /* Ocupa todo el ancho */
+    height: 100%; /* Ocupa todo el alto */
+    padding: 0%;
+    margin-left: 0%;
+    margin-right: 0%;
+    border: 2px solid #155724;
+    border-radius: 8px;       
+    background-image: url(../../../../../assets/fondoPreguntados.jpg);
+    background-size: cover; 
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.contenedorJuego {
+    position: relative;
+    width: 100%;    
+    height: calc(100vh - 150px);
+     
+}
+.contenedor{
+    border: 2px solid #155724;
+    border-radius: 8px;
+}
+
+
+/*spinner*/
+.spinner-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000; /* Superpón al contenido debajo */
+    /* background: rgba(255, 255, 255, 0.8);  */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+
+.container-preguntados{
+    width: 500px;
+    height: 700px;
+    border-radius: 20px;
+    /* border: 2px solid rgb(0, 0, 0); */
+    background-color: dodgerblue;
+    
+}
+.preguntas-puntaje {
+    width: 100%;
+    height: 120px;
+    /* background-color: lightblue; */
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;    
+}
+.preguntas{
+    width: 100%;
+    height: 280px;
+    /* background-color: rgb(23, 95, 119); */
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    /* background-color: rgb(177, 201, 177); */
+    flex-direction: column;
+}
+.botones{
+    flex-grow: 1;
+    /* background-color: lightgreen; */
+    flex-grow: 1; /* Ocupa el espacio restante */
+    display: flex; /* Activar flexbox dentro de bottom-div */
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */    
+    flex-direction: column;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+.btn-respuestas{
+    width: 400px;
+    height: 60px;
+    /* display: flex;
+    flex-direction: column;  
+    justify-content: space-between;  
+    align-items: center; */
+    background-color: rgb(112, 230, 112);
+    color: white;
+}
+
+.gothic-a1-extrabold {
+    font-family: "Gothic A1", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+} 
+
+.cont-preguntas{
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: white;
+    border-radius: 20px;
+}

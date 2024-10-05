@@ -12,12 +12,14 @@ import { compileComponentClassMetadata } from '@angular/compiler';
 export class CrucigramaComponent implements OnInit{
 
   tablero: string[][] = [];
-  tam: number = 12;
+  tam: number = 15;
   jugando = false;
   direccion = 'H';
 
   palabras = [
-    
+    // {palabra: 'angular', fila: 1, columna: 1, direccion: 'H', pista: 'Framework para crear aplicaciones web.'},
+    // {palabra: 'typescript', fila: 3, columna: 1, direccion: 'V', pista: 'Lenguaje de programación que mejora JavaScript.'},
+    // {palabra: 'crucigrama', fila: 5, columna: 5, direccion: 'H', pista: 'Juego de palabras que se cruzan.'},
     'ALBANIA','ALEMANIA','ANDORRA','AUSTRIA','BELARUS','BELGICA','BULGARIA','CHIPRE',
     'CROACIA', 'DINAMARCA', 'ESLOVAQUIA', 'ESLOVENIA','ESPAÑA','ESTONIA','FINLANDIA',
     'FRANCIA','GRECIA','HUNGRIA','IRLANDA','ISLANDIA','ITALIA','LETONIA','LIECHTENSTEIN',
@@ -26,16 +28,8 @@ export class CrucigramaComponent implements OnInit{
     'RUSIA','SERBIA', 'SUECIA','SUIZA','TURQUIA','UCRANIA','VATICANO',
     'ARGENTINA','ARUBA','BAHAMAS','BARBADOS','BELICE','BOLIVIA','BRASIL','CANADA','CHILE',                                                   
     'COLOMBIA','CUBA','DOMINICANA','ECUADOR','GRANADA','GUATEMALA','GUYANA','HAITI','HONDURAS',                                                
-    'JAMAICA','MEXICO','NICARAGUA','PANAMA','PARAGUAY','PERU','URUGUAY', 'ANGOLA', 'ARGELIA', 
-    'BENIN', 'BOTSUANA','BURUNDI','CAMERUN', 'CHAD', 'COMORAS','EGIPTO','ERITREA', 'ESUATINI',
-    'ETIOPIA', 'GABON', 'GAMBIA', 'GHANA','GUINEA','KENIA', 'LESOTHO', 'LIBERIA', 'LIBIA',
-    'MADAGASCAR', 'MALAUI', 'MALI', 'MARRUECOS', 'MAURICIO', 'MAURITANIA', 'MOZAMBIQUE',
-    'NAMIBIA', 'NIGER', 'NIGERIA', 'RUANDA','SENEGAL', 'SEYCHELLES', 'SOMALIA', 'SUDAFRICA', 'SUDAN', 
-    "TANZANIA", "TOGO", "TUNEZ", "UGANDA", "YIBUTI", "ZAMBIA",'ZIMBABUE'
-   ];
-   // {palabra: 'angular', fila: 1, columna: 1, direccion: 'H', pista: 'Framework para crear aplicaciones web.'},
-    // {palabra: 'typescript', fila: 3, columna: 1, direccion: 'V', pista: 'Lenguaje de programación que mejora JavaScript.'},
-    // {palabra: 'crucigrama', fila: 5, columna: 5, direccion: 'H', pista: 'Juego de palabras que se cruzan.'},
+    'JAMAICA','MEXICO','NICARAGUA','PANAMA','PARAGUAY','PERU','URUGUAY'                                                
+  ];
 
   constructor() { }
 
@@ -48,78 +42,101 @@ export class CrucigramaComponent implements OnInit{
     // crear un tablero vacio con espacios en blanco
     this.tablero = Array(this.tam).fill(null).map(() => Array(this.tam).fill(''));    
   }
-  tomarPalabraAlAzar(): string | null {
-    if (this.palabras.length === 0) {
-        return null; 
-    }
-    
-    const indice = Math.floor(Math.random() * this.palabras.length);
-    const palabra = this.palabras[indice];
-      
-    this.palabras.splice(indice, 1);
-    
-    return palabra;
-  }
-  colocarPrimeraPalabra(): void {
-    // Tomar una palabra al azar
-    const palabra = this.tomarPalabraAlAzar();
-    
-    // Si no hay palabra disponible, termina la función
-    if (!palabra) return;
 
-    let fila, columna, entra;
-
-    // Generar posición aleatoria entre filas 0 a 4 y columnas 0 a 3
-    do {
-        fila = Math.floor(Math.random() * 3); // Filas entre 0 y 2
-        columna = Math.floor(Math.random() * 4); // Columnas entre 0 y 3
-
-        // Comprobar si la palabra entra en el tablero desde esta posición
-        entra = this.entraPalabraHorizontalmente(palabra, fila, columna);
-    } while (!entra); // Seguir intentando hasta que la palabra pueda colocarse
-
-    // Colocar la palabra en el tablero
-    for (let i = 0; i < palabra.length; i++) {
-        this.tablero[fila][columna + i] = palabra[i];
-    }
-  }
-  entraPalabraHorizontalmente(palabra: string, fila: number, columna: number): boolean {
-    // Verificar si la palabra puede colocarse desde la posición (fila, columna)
-    if (columna + palabra.length > this.tam) {
-        return false; // Si la palabra no cabe, retorna false
-    }
-
-    // Comprobar que las celdas en el tablero estén vacías
-    for (let i = 0; i < palabra.length; i++) {
-        if (this.tablero[fila][columna + i] !== '') {
-            return false; // Si alguna celda no está vacía, retorna false
-        }
-    }
-
-    return true; // Si pasa todas las comprobaciones, retorna true
-  }
-  tomarLetraAlAzar(palabra: string): string {
-    const indice = Math.floor(Math.random() * palabra.length);
-    return palabra[indice];
-}
-
-  comenzar(): void {
-    this.jugando = true;     
-    this.inicializarTablero();
-    this.colocarPrimeraPalabra();
-    //this.colocarPalabra()
-    // this.colocarPalabras();
-  }
-
-
-
-  
-
-  // tomarPalabraAlAzar(): string {
-  //   const indice = Math.floor(Math.random() * this.palabras.length);
-  //   return this.palabras[indice];
+  // colocarPalabras(): void {
+  //   let direccion = 'H';      
+  //   this.palabras.forEach(palabraObj => {
+  //     const palabra = palabraObj.palabra;    
+  //     let fila = Math.floor(Math.random() * 15);
+  //     let columna = Math.floor(Math.random() * 15);      
+  //     let entra;
+  //     //busco posicion para que la palabra entre
+  //     do {        
+  //       if(direccion == 'H')
+  //       {
+  //         entra = this.entraPalabra(columna, palabra);
+  //         if(entra == false){
+  //           columna = Math.floor(Math.random() * 15); 
+  //         }
+  //       }else{
+  //         entra = this.entraPalabra(fila, palabra);
+  //         if(entra == false){
+  //           fila = Math.floor(Math.random() * 15);
+  //         }
+  //       }
+  //     }
+  //     while(entra == false);
+  //     // cuando ya se que entra las ubico
+  //     for (let i = 0; i < palabra.length; i++){
+  //       if (direccion === 'H') {
+  //         this.tablero[fila][columna + i] = palabra[i];
+  //         if(palabra.length -1 == i){
+  //           direccion = 'V';
+  //         }
+  //       } else if (direccion === 'V') {
+  //         this.tablero[fila + i][columna] = palabra[i];
+  //         if(palabra.length -1 == i){
+  //           direccion = 'H';
+  //         }
+  //       }
+  //     }      
+  //   });
   // }
- 
+
+
+  // el qie estaba usando
+  // colocarPalabra(){    
+  //   let palabra = this.tomarPalabraAlAzar();    
+  //   console.log('palabra elegida',palabra);
+  //   let fila = Math.floor(Math.random() * 15);
+  //   let columna = Math.floor(Math.random() * 15);      
+  //   let entra;
+  //   let colocable;    
+    
+  //   do {        
+  //     if(this.direccion == 'H')
+  //     {
+  //       entra = this.entraPalabra(columna, palabra);
+  //       if(entra == false ){
+  //         columna = Math.floor(Math.random() * 15); 
+  //       }
+  //     }else{
+  //       entra = this.entraPalabra(fila, palabra);
+  //       if(entra == false){
+  //         fila = Math.floor(Math.random() * 15);
+  //       }
+  //     }
+  //     // if(entra && !this.esColocable(palabra, fila, columna)){
+  //     //if(entra && !this.esColocable(palabra, fila, columna) && !this.esColocableConEspacio(palabra, fila, columna)){
+  //     if(entra && !this.esColocableConEspacio(palabra, fila, columna)){
+  //       entra = false;        
+  //       columna = Math.floor(Math.random() * 15);
+  //       fila = Math.floor(Math.random() * 15);
+  //     }
+  //   }while(entra == false);
+    
+  //   for (let i = 0; i < palabra.length; i++){
+  //     if (this.direccion === 'H') {
+  //       this.tablero[fila][columna + i] = palabra[i];
+  //       //console.log(`Verificando fila: ${fila}, columna: ${columna+i}, letra: ${palabra[i]}`);  
+  //       if(palabra.length -1 == i){
+  //         this.direccion = 'V';
+  //       }
+  //     } else if (this.direccion === 'V') {
+  //       this.tablero[fila + i][columna] = palabra[i];
+  //       if(palabra.length -1 == i){
+  //         this.direccion = 'H';
+  //       }
+  //     }
+  //   }     
+  //   // console.log('Estado del tablero actual:');
+  //   // console.table(this.tablero);
+  // }
+
+  tomarPalabraAlAzar(): string {
+    const indice = Math.floor(Math.random() * this.palabras.length);
+    return this.palabras[indice];
+  }
   entraPalabra(posicion: number, palabra:string){
     let lugaresDisp = (this.tam-1)-(posicion);
     if( lugaresDisp - palabra.length >=0){
@@ -224,57 +241,51 @@ export class CrucigramaComponent implements OnInit{
     return true;
   }
   
-  // colocarPalabra(){    
-  //   let palabra = this.tomarPalabraAlAzar();        
-  //   let fila, columna, entra, colocable;
-  //   let contador = 0;
-  //   do {
-  //       contador++;
-  //       fila = Math.floor(Math.random() * this.tam);
-  //       columna = Math.floor(Math.random() * this.tam);
-  //       console.log('palabra: ', palabra, ' fila: ',fila, 'columna: ', columna);
+  colocarPalabra(){    
+    let palabra = this.tomarPalabraAlAzar();        
+    let fila, columna, entra, colocable;
+    let contador = 0;
+    do {
+        contador++;
+        fila = Math.floor(Math.random() * this.tam);
+        columna = Math.floor(Math.random() * this.tam);
 
-  //       if (this.direccion === 'H') {
-  //           entra = this.entraPalabra(columna, palabra);  // Verifica si la palabra entra horizontalmente
-  //           console.log('entra: ',entra);
-  //       } else {
-  //           entra = this.entraPalabra(fila, palabra);  // Verifica si la palabra entra verticalmente
-  //       }
-  //       if (entra) {
-
-  //           // Verifica que sea colocable por intersección y por espacio alrededor
-  //           //colocable = this.esColocable(palabra, fila, columna) && this.esColocableConEspacio(palabra, fila, columna);
-  //           colocable = this.esColocableConEspacio(palabra, fila, columna);
-  //           if (!colocable) {
-  //               entra = false;  // Si no es colocable correctamente, forzar el cambio de fila/columna
-  //           }            
-          
-  //       }
-
-  //       if (contador == 10000){
-  //         palabra = this.tomarPalabraAlAzar();          
-  //         contador = 0;
-  //       }
-  //       console.log(palabra);
-  //   } while (!entra);  // Repetir el ciclo hasta que encuentre un lugar válido        
-  //   contador = 0;
-  //   // Si sale del ciclo, se puede colocar la palabra
-  //   for (let i = 0; i < palabra.length; i++) {
-  //     if (this.direccion === 'H') {
-  //         this.tablero[fila][columna + i] = palabra[i];
-  //         if (i === palabra.length - 1) {
-  //             this.direccion = 'V';  // Alterna la dirección después de colocar la palabra
-  //         }
-  //     } else {
-  //         this.tablero[fila + i][columna] = palabra[i];
-  //         if (i === palabra.length - 1) {
-  //             this.direccion = 'H';  // Alterna la dirección después de colocar la palabra
-  //         }
-  //     }
-  //   }      
-  //   console.log('palabra: ' + palabra, ' columna: ' + columna, 'fila: ' + fila);
+        if (this.direccion === 'H') {
+            entra = this.entraPalabra(columna, palabra);  // Verifica si la palabra entra horizontalmente
+        } else {
+            entra = this.entraPalabra(fila, palabra);  // Verifica si la palabra entra verticalmente
+        }
+        if (entra) {
+            // Verifica que sea colocable por intersección y por espacio alrededor
+            //colocable = this.esColocable(palabra, fila, columna) && this.esColocableConEspacio(palabra, fila, columna);
+            colocable = this.esColocableConEspacio(palabra, fila, columna);
+            if (!colocable) {
+                entra = false;  // Si no es colocable correctamente, forzar el cambio de fila/columna
+            }
+        }
+        if (contador == 50){
+          palabra = this.tomarPalabraAlAzar();          
+          contador = 0;
+        }
+    } while (!entra);  // Repetir el ciclo hasta que encuentre un lugar válido    
+    contador = 0;
+    // Si sale del ciclo, se puede colocar la palabra
+    for (let i = 0; i < palabra.length; i++) {
+      if (this.direccion === 'H') {
+          this.tablero[fila][columna + i] = palabra[i];
+          if (i === palabra.length - 1) {
+              this.direccion = 'V';  // Alterna la dirección después de colocar la palabra
+          }
+      } else {
+          this.tablero[fila + i][columna] = palabra[i];
+          if (i === palabra.length - 1) {
+              this.direccion = 'H';  // Alterna la dirección después de colocar la palabra
+          }
+      }
+    }      
+    console.log('palabra: ' + palabra, ' columna: ' + columna, 'fila: ' + fila);
     
-  // }
+  }
 
   // esColocable2(palabra:string, fila:number, columna:number){
   //   for (let i = 0; i < palabra.length; i++){
@@ -431,6 +442,14 @@ export class CrucigramaComponent implements OnInit{
   //     alert('Algunas respuestas son incorrectas, sigue intentando.');
   //   }
   // }
-  
- 
+  comenzar(): void {
+    this.jugando = true;     
+    this.inicializarTablero();
+    for(let i = 0; i<30; i++){
+      this.colocarPalabra();
+      console.log('PUESTO');
+    }
+    //this.colocarPalabra()
+    // this.colocarPalabras();
+  }
 }

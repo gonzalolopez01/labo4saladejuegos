@@ -1,0 +1,28 @@
+
+<div class="position-relative contenedorJuego d-flex flex-column justify-content-center align-items-center">    
+    <div class="container d-flex flex-column justify-content-center align-items-center"> 
+        @if(!jugando){
+            <h2>Crucigrama</h2>
+            <button (click)="comenzar()" class="btn btn-success mb-5">Comenzar</button>
+        }@else {
+            <div class="tablero">
+                <div *ngFor="let fila of tablero; let i = index" class="fila">
+                    <div *ngFor="let casilla of fila; let j = index" class="casilla">
+                        <input *ngIf="casilla !== ''" type="text" maxlength="1" [(ngModel)]="tablero[i][j]" />
+                        <div *ngIf="casilla === ''" class="casilla-vacia"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- <div class="pistas">
+            <h2>Pistas</h2>
+            <ul>
+                <li *ngFor="let palabraObj of palabras">
+                {{ palabraObj.pista }} ({{ palabraObj.direccion === 'H' ? 'Horizontal' : 'Vertical' }})
+                </li>
+            </ul>
+            </div>
+            <button (click)="comprobar()">Verificar respuestas</button> -->
+        }
+    </div>
+</div>

@@ -79,5 +79,5 @@ width: 100%;      /* Asegura que el ancho del contenido use todo el espacio disp
     position: relative;
     width: 100%;
     height: calc(100vh - 150px);
-    
+    overflow-y: auto;
   }

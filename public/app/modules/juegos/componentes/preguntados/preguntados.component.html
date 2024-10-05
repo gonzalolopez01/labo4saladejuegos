@@ -1,1 +1,75 @@
-<p>preguntados works!</p>
+<div class="position-relative contenedorJuego d-flex flex-column justify-content-center align-items-center">    
+    <div class="container d-flex flex-column justify-content-center align-items-center">    
+        @if(!jugando){
+            <h2>Preguntados</h2>
+            <button (click)="comenzar()" class="btn btn-success mb-5">Comenzar</button>
+        }@else{
+                
+
+            <div *ngIf="cargandoJuego; else elseBlock;" class="spinner-overlay">
+                <div class="spinner-border text-succes" role="status">
+                    <span class="visually-hidden">Cargando...</span>
+                </div>
+            </div>
+            <ng-template #elseBlock>    
+                
+                            
+                <div *ngIf="currentQuestionIndex < preguntas.length; else gameOver" class="d-flex flex-column container-preguntados">
+                    <div class="preguntas-puntaje d-flex flex-column justify-content-between">
+                        <h2>Pregunta {{currentQuestionIndex + 1}}/{{preguntas.length}}</h2>
+                        <p>Puntaje: {{score}}</p>
+                        <p id="temporizador"> {{tiempo}}</p>
+                    </div>
+                                                                                                           
+                    <div class="cont-preguntas d-flex flex-column justify-content-between">                        
+                        <!-- <p class="preguntas gothic-a1-extrabold">{{preguntas[currentQuestionIndex].question}}</p> -->
+                        <div class="preguntas gothic-a1-extrabold" [innerHTML]="preguntas[currentQuestionIndex].question"></div>
+                    </div>
+                    
+                    <div class="botones">
+                        <div *ngFor="let answer of preguntas[currentQuestionIndex].allAnswers">
+                            <button class="btn my-2 btn-respuestas" (click)="selectAnswer(answer); stopTemporizador(); iniciarTemporizador()" [disabled]="selectedAnswer">{{ answer }}</button>
+                        </div>
+                        
+                        <!-- <button class="btn btn-success my-2 btn-respuestas" (click)="checkAnswer()" [disabled]="!selectedAnswer">Comprobar respuesta</button> -->
+                    </div>
+                                                               
+                </div>
+                    
+            </ng-template>
+        }
+    </div>
+    <!-- <div *ngIf="currentQuestionIndex < preguntas.length; else gameOver">
+        <h2>Pregunta {{currentQuestionIndex + 1}}/{{preguntas.length}}</h2>
+        <p>{{preguntas[currentQuestionIndex].question}}</p>
+        
+        <div *ngFor="let answer of preguntas[currentQuestionIndex].allAnswers">
+            <button (click)="selectAnswer(answer)" [disabled]="selectedAnswer">{{ answer }}</button>
+        </div>
+        
+        <button (click)="checkAnswer()" [disabled]="!selectedAnswer">Comprobar respuesta</button>
+        
+        <p>Puntaje: {{score}}</p>
+    </div> -->
+
+
+    <!-- <ng-template #pregunta>
+        <div>
+            
+        
+            <button (click)="Login()" class="btn form-control mb-5 texto-blanco">Pregunta</button>
+            <button (click)="Login()" class="btn form-control mb-5 texto-blanco">Pregunta</button>
+        </div>
+    </ng-template> -->
+</div>
+
+<ng-template>
+
+</ng-template>
+  
+<ng-template #gameOver>
+<h2>Juego Terminado</h2>
+<p>Tu puntaje fue: {{score}}</p>
+<button class="btn btn-success" (click)="restartGame()">Reiniciar juego</button>
+</ng-template>
+  

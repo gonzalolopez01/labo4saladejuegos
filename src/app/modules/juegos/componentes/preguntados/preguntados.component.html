@@ -5,37 +5,33 @@
             <button (click)="comenzar()" class="btn btn-success mb-5">Comenzar</button>
         }@else{
                 
-
-            <div *ngIf="cargandoJuego; else elseBlock;" class="spinner-overlay">
+            <div *ngIf="cargandoJuego || spinnerOn; else elseBlock;" class="spinner-overlay">
                 <div class="spinner-border text-succes" role="status">
-                    <span class="visually-hidden">Cargando...</span>
+                    <span class="visually-hidden">Cargando...</span>                
                 </div>
             </div>
-            <ng-template #elseBlock>    
-                
-                            
-                <div *ngIf="currentQuestionIndex < preguntas.length; else gameOver" class="d-flex flex-column container-preguntados">
-                    <div class="preguntas-puntaje d-flex flex-column justify-content-between">
-                        <h2>Pregunta {{currentQuestionIndex + 1}}/{{preguntas.length}}</h2>
-                        <p>Puntaje: {{score}}</p>
-                        <p id="temporizador"> {{tiempo}}</p>
+            <ng-template #elseBlock>          
+                <!-- <div *ngIf="currentQuestionIndex < preguntas.length; else gameOver" class="d-flex flex-column container-preguntados" [ngStyle]="{'background-image': 'url(' + urlFondo + ')', 'background-size': 'cover', 'background-position': 'center', 'opacity': '0.7'}"> -->
+                <div *ngIf="currentQuestionIndex < preguntas.length; else gameOver" class="d-flex flex-column container-preguntados" [ngStyle]="{'background-image': 'url(' + urlFondo + ')', 'background-size': 'cover', 'background-position': 'center'}">
+                    <div class="preguntas-puntaje d-flex justify-content-around">
+                        <h2>{{currentQuestionIndex + 1}}/{{preguntas.length}}</h2>
+                        <h2>Puntaje: {{score}}</h2>                        
                     </div>
-                                                                                                           
+                    <div><h2 id="temporizador" class="text-center"> {{tiempo}}</h2></div>
+                                                                                                            
                     <div class="cont-preguntas d-flex flex-column justify-content-between">                        
                         <!-- <p class="preguntas gothic-a1-extrabold">{{preguntas[currentQuestionIndex].question}}</p> -->
                         <div class="preguntas gothic-a1-extrabold" [innerHTML]="preguntas[currentQuestionIndex].question"></div>
                     </div>
                     
-                    <div class="botones">
+                    <div class="botones-contenedor">
                         <div *ngFor="let answer of preguntas[currentQuestionIndex].allAnswers">
                             <button class="btn my-2 btn-respuestas" (click)="selectAnswer(answer); stopTemporizador(); iniciarTemporizador()" [disabled]="selectedAnswer">{{ answer }}</button>
                         </div>
                         
                         <!-- <button class="btn btn-success my-2 btn-respuestas" (click)="checkAnswer()" [disabled]="!selectedAnswer">Comprobar respuesta</button> -->
-                    </div>
-                                                               
-                </div>
-                    
+                    </div>                                                                
+                </div>                    
             </ng-template>
         }
     </div>
@@ -68,8 +64,8 @@
 </ng-template>
   
 <ng-template #gameOver>
-<h2>¡Juego terminado!</h2>
+<h2>Juego Terminado</h2>
 <p>Tu puntaje fue: {{score}}</p>
-<button (click)="restartGame()">Reiniciar juego</button>
+<button class="btn btn-success" (click)="restartGame()">Reiniciar juego</button>
 </ng-template>
   
