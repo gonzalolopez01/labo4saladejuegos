@@ -66,7 +66,7 @@ export class PuntajesService {
     const resultadosSnapshot = await getDocs(collection(this.firestore, 'resultados'));
     const resultados = resultadosSnapshot.docs.map(doc => doc.data());
 
-    // Agrupar puntajes por usuario y juego
+    
     const puntajesAgrupados: any = {};
 
     resultados.forEach((resultado: any) => {
@@ -80,10 +80,10 @@ export class PuntajesService {
         puntajesAgrupados[usuario][juego] = 0;
       }
 
-      puntajesAgrupados[usuario][juego] += puntaje; // Suma de puntajes
+      puntajesAgrupados[usuario][juego] += puntaje; 
     });
 
-    // Convertir en un arreglo para facilitar la visualización
+    
     const listaPuntajes: any[] = [];
 
     for (const usuario in puntajesAgrupados) {
@@ -95,6 +95,8 @@ export class PuntajesService {
         });
       }
     }
+
+    listaPuntajes.sort((a, b) => b.puntajeTotal - a.puntajeTotal);
 
     return listaPuntajes;
   }
