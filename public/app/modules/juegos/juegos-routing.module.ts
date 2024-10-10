@@ -5,6 +5,8 @@ import { PreguntadosComponent } from './componentes/preguntados/preguntados.comp
 import { MayoromenorComponent } from './componentes/mayoromenor/mayoromenor.component';
 import { QuiensoyComponent } from './componentes/quiensoy/quiensoy.component';
 import { CrucigramaComponent } from './componentes/crucigrama/crucigrama.component';
+import { SimonComponent } from './componentes/simon/simon.component';
+
 
 const routes: Routes = [
   {
@@ -24,9 +26,10 @@ const routes: Routes = [
     component:QuiensoyComponent
   },
   {
-    path: 'crucigrama',
-    component:CrucigramaComponent
+    path: 'simon',
+    component:SimonComponent
   }
+
 ];
 
 

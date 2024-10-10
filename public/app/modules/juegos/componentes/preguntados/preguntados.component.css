@@ -21,7 +21,7 @@
     position: relative;
     width: 100%;    
     height: calc(100vh - 150px);
-     
+    overflow-y: auto; 
 }
 .contenedor{
     border: 2px solid #155724;
@@ -45,31 +45,37 @@
   }
 
 .container-preguntados{
-    width: 500px;
-    height: 700px;
+    width: 400px;
+    /*height: 700px; */
     border-radius: 20px;
     /* border: 2px solid rgb(0, 0, 0); */
-    background-color: dodgerblue;
+    /* background-color: dodgerblue; */
+    /*background-color: red;*/
+
+    overflow: auto;
     
 }
 .preguntas-puntaje {
     width: 100%;
-    height: 120px;
+    height: 35px;
     /* background-color: lightblue; */
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;    
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-decoration: solid;
 }
 .preguntas{
     width: 100%;
-    height: 280px;
+    height: 180px;
     /* background-color: rgb(23, 95, 119); */
     display: flex; 
     justify-content: center; 
     align-items: center; 
     /* background-color: rgb(177, 201, 177); */
     flex-direction: column;
+    font-size: 20px;
 }
-.botones{
+.botones-contenedor{
     flex-grow: 1;
     /* background-color: lightgreen; */
     flex-grow: 1; /* Ocupa el espacio restante */
@@ -81,14 +87,15 @@
     border-bottom-right-radius: 20px;
 }
 .btn-respuestas{
-    width: 400px;
-    height: 60px;
+    width: 350px;
+    /*height: 60px; */
+
     /* display: flex;
     flex-direction: column;  
     justify-content: space-between;  
     align-items: center; */
     background-color: rgb(112, 230, 112);
-    color: white;
+    color: white;    
 }
 
 .gothic-a1-extrabold {
@@ -102,6 +109,9 @@
     margin-right: 30px;
     margin-top: 10px;
     margin-bottom: 10px;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.8);
+    /* opacity: 0.5; */
+    color: black;
+    text-decoration: solid;
     border-radius: 20px;
 }

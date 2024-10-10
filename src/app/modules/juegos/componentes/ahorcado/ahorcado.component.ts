@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { count } from '@firebase/firestore';
+import { PuntajesService } from '../../../../services/puntajes.service';
 
 @Component({
   selector: 'app-ahorcado',  
@@ -30,7 +31,7 @@ export class AhorcadoComponent  implements OnInit{
   puntaje = 0;
   // $boton = document.getElementById('botonJugar');
 
-  constructor() {
+  constructor(private puntajeService:PuntajesService) {
     this.teclado= 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');   
     
     setTimeout(() => {
@@ -102,9 +103,12 @@ export class AhorcadoComponent  implements OnInit{
         }
       }      
       if(this.esGanador()){
-        this.mensaje = "Sos un capo, ganaste!!!";
+        this.mensaje = "Ganaste!!!";
         this.deshabilitarTeclado();
         this.ganaste=true;
+        setTimeout(() => {
+          this.guardarPuntaje();
+        }, 3000);
         return;
       }
     }
@@ -112,7 +116,10 @@ export class AhorcadoComponent  implements OnInit{
       this.index++;
       if(this.index === 6){   
         this.mensaje = "Perdiste!!!";  
-        this.deshabilitarTeclado();     
+        this.deshabilitarTeclado();    
+        setTimeout(() => {
+          this.guardarPuntaje();
+        }, 3000);
         return;
       }
     }
@@ -153,6 +160,21 @@ export class AhorcadoComponent  implements OnInit{
   //     $divPalabra?.appendChild(span);
   //   });
   // }
+
+  
+  // guardarPuntaje(){
+  //   this.puntajeService.guardarResultado('Ahoracado', this.puntaje)
+  //     .then(()=> console.log('Resulatado guardado'))
+  //     .catch(error => console.error('Error al guardar puntaje: ', error));    
+  // }
+  async guardarPuntaje() {
+    try {
+      await this.puntajeService.guardarResultado('Ahoracado', this.puntaje);
+      console.log('Resultado guardado');      
+    } catch (error) {
+      console.error('Error al guardar puntaje: ', error);
+    }
+  }
   
 }
 

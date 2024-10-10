@@ -17,7 +17,8 @@
                     <p class="silkscreen-regular">Puntaje: {{puntaje}}</p>
                 </div>
                 <!-- position-relative, hace que un elemento hijo con posicion absoluta se coloce de esa mannera sobre el padre -->
-                <div class="contenedorCartas d-flex position-relative justify-content-center mx-4">            
+                <div class="contenedorCartas d-flex flex-column position-relative justify-content-center mx-4">            
+                
                     <div class="contenedor-fijo d-flex flex-column justify-content-center align-items-center mx-3">
                         <h3 class="silkscreen-regular">Carta Anterior:</h3>                
                         @if(cartaAnterior){
@@ -40,19 +41,20 @@
                             }
                         </ng-template>  
                     </div>
+                    
                     <div *ngIf="estado" class="mensaje elemento-centro" [ngClass]="{'correcto': estado === 'correcto', 'incorrecto': estado === 'incorrecto'}">
                         <p class="silkscreen-regular">{{estado === 'correcto' ? 'Correcto!!!' : 'Incorrecto, perdiste!!!'}}</p>
                     </div>  
-                </div>      
+                </div>                      
                 
-                @if(cargo && !perdiste){
+                @if(cargo && !perdiste){                   
                     <div class="d-flex mt-5 mb-5">
                         <div class="mx-3">
                             <button  id="botonMayor" (click)="valor = true; pedirCarta();"  class="btn btn-success">Mayor</button>
                         </div>
                         <div  class="mx-3">
                             <button id="botonMenor" (click)="valor = false; pedirCarta();"  class="btn btn-success">Menor</button>
-                        </div>            
+                        </div>                                  
                     </div>  
                 }
                 @if(perdiste){

@@ -27,6 +27,7 @@ export class AhorcadoComponent  implements OnInit{
   mensaje = '';
   ganaste = false;
   cargando = true;
+  puntaje = 0;
   // $boton = document.getElementById('botonJugar');
 
   constructor() {
@@ -40,6 +41,7 @@ export class AhorcadoComponent  implements OnInit{
     //this.generarTeclado();
   }
   jugar(){
+    this.puntaje = 0;
     this.ganaste = false;
     this.index = 0;
     this.generarTeclado();
@@ -96,6 +98,7 @@ export class AhorcadoComponent  implements OnInit{
       for(let i=0; i<this.palabra.length; i++){
         if(this.palabra[i]===letra){
           this.palabraIncompleta[i] = letra;
+          this.puntaje++;
         }
       }      
       if(this.esGanador()){

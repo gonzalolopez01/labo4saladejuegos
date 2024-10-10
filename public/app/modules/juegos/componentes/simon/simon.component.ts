@@ -1,6 +1,5 @@
 import { sequence } from '@angular/animations';
 import { Component } from '@angular/core';
-import { PuntajesService } from '../../../../services/puntajes.service';
 
 @Component({
   selector: 'app-simon',
@@ -15,16 +14,6 @@ export class SimonComponent {
   isPlayerTurn: boolean = false;
   cells: HTMLElement[] = [];
 
-  puntaje = 0;
-  restartDisabled = false;
-  cargandoJuego = true;
-  
-  constructor(private puntajeService:PuntajesService){
-    setTimeout(() => {
-      this.cargandoJuego = false; // Cuando termine la tarea, ocultar el spinner
-    }, 2000); 
-  }
-
   ngAfterViewInit() {
     this.cells = Array.from(document.getElementsByClassName('cell')) as HTMLElement[];
   }
@@ -38,19 +27,19 @@ export class SimonComponent {
   //     }, 300);
   //   }, time);
   // }
-  illuminate(cellPos: number, time: number) {//ilumina
+  illuminate(cellPos: number, time: number) {
     setTimeout(() => {
       const cell = document.querySelector(`.cell[pos="${cellPos}"]`) as HTMLElement;
       if (cell) {
-        cell.classList.add('active'); //clase active
+        cell.classList.add('active'); // Añadir la clase 'active'
         setTimeout(() => {
-          cell.classList.remove('active'); //se la saco despues de 300ms
+          cell.classList.remove('active'); // Quitar la clase 'active' después de 300ms
         }, 300);
       }
     }, time);
   }
-  setMoves(current: number) {//guarda la cantidad de moves al azar que le digas
-    this.moves.push(Math.floor(Math.random() * 4) + 1);//guarda numero al azar 1 a 4 en el array
+  setMoves(current: number) {
+    this.moves.push(Math.floor(Math.random() * 4) + 1);
     if (current < this.totalMoves) {
       this.setMoves(++current);
     }
@@ -61,7 +50,6 @@ export class SimonComponent {
     this.totalMoves = 2;
     this.message = 'Simón dice';
     this.isPlayerTurn = false;
-    this.restartDisabled = true;
     this.sequence();
   }
 
@@ -72,11 +60,11 @@ export class SimonComponent {
     this.isPlayerTurn = false;
 
     for (let i = 0; i < this.moves.length; i++) {
-      this.illuminate(this.moves[i], 600 * i);//ilumina las celdas guardadas
+      this.illuminate(this.moves[i], 600 * i);
     }
 
     setTimeout(() => {
-      this.message = 'Tu turno';
+      this.message = 'Repite la secuencia';
       this.isPlayerTurn = true;
     }, 600 * this.moves.length);
   }
@@ -90,7 +78,7 @@ export class SimonComponent {
     if (this.moves && this.moves.length) {
       if (this.moves[0] === cellPos) {
         this.moves.shift();
-        this.puntaje++;
+
         if (!this.moves.length) {
           this.totalMoves++;
           this.isPlayerTurn = false;
@@ -101,24 +89,10 @@ export class SimonComponent {
       } else {
         this.message = 'GAME OVER';
         this.isPlayerTurn= false;
-        // setTimeout(() => {
-        //   this.message = 'Haz clic en comenzar';
-        // }, 1000);
-        setTimeout(() => {          
-          this.guardarPuntaje();
+        setTimeout(() => {
           this.message = 'Haz clic en comenzar';
-         }, 1000); 
+        }, 1000);
       }
-    }
-  }
-  async guardarPuntaje() {
-    try {
-      await this.puntajeService.guardarResultado('Simón dice', this.puntaje);
-      console.log('Resultado guardado');      
-      this.restartDisabled = false;
-    } catch (error) {
-      console.error('Error al guardar puntaje: ', error);
-      this.restartDisabled = false;
     }
   }
 }

@@ -29,6 +29,7 @@ export class ChatComponent implements OnInit{
   }
   enviarMensaje(){
     this.chat.escribirChat(this.user, this.mensaje);    
+    this.mensaje="";
   }
 
 }

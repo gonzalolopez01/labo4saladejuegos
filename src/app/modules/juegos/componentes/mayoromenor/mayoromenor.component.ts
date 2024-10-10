@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CartasService} from '../../../../services/cartas.service';
 import { Carta } from '../../../../clases/carta';
+import { PuntajesService } from '../../../../services/puntajes.service';
 
 @Component({
   selector: 'app-mayoromenor',
@@ -31,13 +32,13 @@ export class MayoromenorComponent implements OnInit{
   puntaje = 0;
 
   cargandoCarta = false;
-
   cargandoJuego = true;
+  restartDisabled = true;
 
   $botonMayor:  HTMLButtonElement | null = null;
   $botonMenor:  HTMLButtonElement | null = null;
   
-  constructor(private cartasService: CartasService){
+  constructor(private cartasService: CartasService, private puntajeService:PuntajesService){
     setTimeout(() => {
       this.cargandoJuego = false; // Cuando termine la tarea, ocultar el spinner
     }, 2000); 
@@ -120,8 +121,11 @@ export class MayoromenorComponent implements OnInit{
           console.log('anterior: ',cartaActual, ' actual: ',cartaPedida);
           console.log('eligio mayor ---> mal');   
           this.mostrarMensaje('incorrecto');
+           setTimeout(() => {
+            this.guardarPuntaje();
+           }, 2000);           
           this.perdiste = true;
-          this.cargo = false;
+          this.cargo = false;          
         }   
       }else{//menor
         //if(this.cartaPedida!.value < this.cartaActual!.value){
@@ -134,6 +138,9 @@ export class MayoromenorComponent implements OnInit{
           console.log('anterior: ',cartaActual, ' actual: ',cartaPedida);
           console.log('eligio menor ---> mal');
           this.mostrarMensaje('incorrecto');
+           setTimeout(() => {
+            this.guardarPuntaje();
+           }, 2000); 
           this.perdiste = true;
           this.cargo = false;
         }
@@ -178,12 +185,14 @@ export class MayoromenorComponent implements OnInit{
     }
   }
   restart(){
+    
     this.primeraVuelta = true;
     this.perdiste = false;
     this.cartaPedida = null;
     this.cartaActual = null;
     this.cartaAnterior = null;
     this.puntaje = 0;
+    this.restartDisabled = true;
     this.obtenerMazo();    
   }
   // desactivarBotones(){
@@ -202,4 +211,15 @@ export class MayoromenorComponent implements OnInit{
 
   //   }
   // }
+
+  async guardarPuntaje() {
+    try {
+      await this.puntajeService.guardarResultado('Mayor o Menor', this.puntaje);
+      this.restartDisabled = false;
+      console.log('Resultado guardado');      
+    } catch (error) {
+      console.error('Error al guardar puntaje: ', error);
+      this.restartDisabled = false;
+    }
+  }
 }

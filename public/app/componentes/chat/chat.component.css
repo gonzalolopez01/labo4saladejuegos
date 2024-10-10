@@ -67,3 +67,23 @@
   padding: 5px 10px;
   margin-left: 5px;
 }
+
+
+.mi-mensaje {
+  background-color: lightgreen;
+  text-align: right;
+  margin-left: auto;
+  max-width: 80%;
+}
+
+.otro-mensaje {
+  background-color: lightblue;
+  text-align: left;
+  margin-right: auto;
+  max-width: 80%;
+}
+
+p {
+  padding: 10px;
+  border-radius: 5px;
+}

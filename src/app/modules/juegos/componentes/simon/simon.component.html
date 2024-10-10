@@ -1,13 +1,26 @@
-<body>
-    <div id="game">
-        <div class="cell" pos="1" (click)="cellClick(1)"> </div>
-        <div class="cell" pos="2" (click)="cellClick(2)"> </div>
-        <div class="cell" pos="3" (click)="cellClick(3)"> </div>
-        <div class="cell" pos="4" (click)="cellClick(4)"> </div>
-      </div>
-    <div id="bottom">
-        <div id="message">{{message}}</div>
-        <button id="start" (click)="startGame()"> Comenzar </button>
+<div class="contenedorJuego position-relative">
+    <div *ngIf="cargandoJuego; else elseBlock1;" class="spinner-overlay">
+        <div class="spinner-border text-succes" role="status">
+            <span class="visually-hidden">Cargando...</span>
+        </div>
     </div>
-</body>
+    <ng-template #elseBlock1>
+        <div class="container d-flex flex-column justify-content-center align-items-center bg-white contenedor">
+            <div class="mt-3" id="puntaje"> 
+                <p class="gothic-a1-extrabold">Puntaje: {{puntaje}}</p>
+            </div>
+            <div class="rotate-center" id="game">
+                <div class="cell" pos="1" (click)="cellClick(1)"> </div>
+                <div class="cell" pos="2" (click)="cellClick(2)"> </div>
+                <div class="cell" pos="3" (click)="cellClick(3)"> </div>
+                <div class="cell" pos="4" (click)="cellClick(4)"> </div>
+            </div>
+            <div id="bottom">
+                <div class="gothic-a1-extrabold" id="message">{{message}}</div>
+                <button class="btn btn-success mb-3" [disabled]="restartDisabled" id="start" (click)="startGame()"> Comenzar </button>
+                <!-- <button  id="start" (click)="startGame()"> Comenzar </button> -->
+            </div>
+        </div>
+    </ng-template>
+</div>
   

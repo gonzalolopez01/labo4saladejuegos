@@ -8,6 +8,7 @@ import { PreguntadosComponent } from './componentes/preguntados/preguntados.comp
 import { QuiensoyComponent } from './componentes/quiensoy/quiensoy.component';
 import { CrucigramaComponent } from './componentes/crucigrama/crucigrama.component';
 import { FormsModule } from '@angular/forms';
+import { SimonComponent } from './componentes/simon/simon.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { FormsModule } from '@angular/forms';
     MayoromenorComponent,
     PreguntadosComponent,
     QuiensoyComponent,
-    CrucigramaComponent    
+    CrucigramaComponent,
+    SimonComponent
   ],
   imports: [    
     CommonModule,    
@@ -27,7 +29,8 @@ import { FormsModule } from '@angular/forms';
     MayoromenorComponent,
     PreguntadosComponent,
     QuiensoyComponent,
-    CrucigramaComponent  
+    CrucigramaComponent,
+    SimonComponent
   ]
 
 })

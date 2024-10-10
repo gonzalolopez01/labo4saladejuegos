@@ -70,4 +70,8 @@ export class HomeComponent implements OnInit {
   toggleChat() {
     this.chat = !this.chat;
   }
+  abrirEncuesta(){
+    this.router.navigate(['/home/encuesta']);
+    
+  }
 }

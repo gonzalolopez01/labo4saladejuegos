@@ -3,7 +3,6 @@ import { Router, RouterOutlet } from '@angular/router';
 import { Usuario } from './clases/usuario';
 import { BrowserModule } from '@angular/platform-browser';
 import { JuegosModule } from './modules/juegos/juegos.module';
-
 @Component({
   selector: 'app-root',
   standalone: true,

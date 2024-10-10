@@ -17,7 +17,7 @@
                     <p class="silkscreen-regular">Puntaje: {{puntaje}}</p>
                 </div>
                 <!-- position-relative, hace que un elemento hijo con posicion absoluta se coloce de esa mannera sobre el padre -->
-                <div class="contenedorCartas d-flex flex-column position-relative justify-content-center mx-4">            
+                <div class="contenedorCartas d-flex position-relative justify-content-center mx-4">            
                 
                     <div class="contenedor-fijo d-flex flex-column justify-content-center align-items-center mx-3">
                         <h3 class="silkscreen-regular">Carta Anterior:</h3>                
@@ -59,7 +59,8 @@
                 }
                 @if(perdiste){
                     <div class="mx-3 mt-5 mb-5">
-                        <button (click)="valor = false; restart();"  class="btn btn-success">Restart???</button>
+                        <button [disabled]="restartDisabled" (click)="valor = false; restart();" class="btn btn-success">Restart???</button>
+                        <!-- <button (click)="valor = false; restart();"  class="btn btn-success">Restart???</button> -->
                     </div>            
                 }                    
             }

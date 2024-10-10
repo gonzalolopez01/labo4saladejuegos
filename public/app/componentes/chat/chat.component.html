@@ -1,15 +1,34 @@
 <!-- <div class="chat-container d-flex flex-column justify-content-center align-items-center"> -->
-<div class="chat-container" >
+  
+<!-- <div class="chat-container" >
     <div class="mensajes">
       <div *ngFor="let mensaje of chats">
         <strong class="text-success">{{mensaje.user}} ( {{(mensaje.fecha.seconds * 1000) | date:'hh:mm a, dd-MM-yy'}} ) dice:</strong> 
-        <p >"{{mensaje.mensaje}}"</p>
-        <!-- {{ mensaje.fecha | date: 'hh:mm a, dd MMMM yyyy' }} -->
-      </div>
+        <p >"{{mensaje.mensaje}}"</p> -->
+        <!-- {{ mensaje.fecha | date: 'hh:mm a, dd MMMM yyyy' }}  ESTO QUE QUEDE COMENTADO-->
+      <!-- </div>
     </div>
     
     <div class="chat-input">
       <input [(ngModel)]="mensaje" placeholder="Escribe tu mensaje..." />
       <button (click)="enviarMensaje()">Enviar</button>
     </div>
+</div> -->
+
+<div class="chat-container" >
+  <div class="mensajes">
+    <div *ngFor="let mensaje of chats">
+      <div [ngClass]="mensaje.user === user ? 'mi-mensaje' : 'otro-mensaje'">
+        <ng-container *ngIf="mensaje.user !== user">
+          <strong class="text-success">{{mensaje.user}}</strong>
+        </ng-container>
+        <small>({{(mensaje.fecha.seconds * 1000) | date:'hh:mm a, dd-MM-yy'}})</small>
+        <p>{{mensaje.mensaje}}</p>
+      </div>
+    </div>
+  </div>
+  <div class="chat-input">
+    <input [(ngModel)]="mensaje" placeholder="Escribe tu mensaje..." />
+    <button (click)="enviarMensaje()">Enviar</button>
+  </div>
 </div>

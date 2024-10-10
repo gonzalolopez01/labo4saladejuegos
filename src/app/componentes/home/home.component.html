@@ -28,6 +28,7 @@
                         <!-- <button class="btn btn-primary " type="button" [routerLink]="'./login'">Logout</button> -->
                         <p class="mt-2 text-center texto-blanco">Usuario: {{auth.currentUser?.email}}</p>
                         <button (click)="CloseSession()" class="boton btn texto-blanco mx-2 mt-3">Logout</button>                 
+                        <button (click)="abrirEncuesta()" class="boton btn texto-blanco mx-2 mt-3">Chat</button>
                         <button (click)="abrirChat()" class="boton btn texto-blanco mx-2 mt-3">Chat</button>
                     </div>     
                 </ng-template>                                

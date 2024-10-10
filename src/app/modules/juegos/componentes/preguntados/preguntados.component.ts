@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { PreguntadosService } from '../../../../services/preguntados.service';
 import { QuizService } from '../../../../services/quiz.service';
 import { UrlTree } from '@angular/router';
+import { PuntajesService } from '../../../../services/puntajes.service';
 
 @Component({
   selector: 'app-preguntados',
@@ -13,7 +14,7 @@ export class PreguntadosComponent implements OnInit, OnDestroy{
   cargandoJuego = true;
   preguntas: any[] = [];
   currentQuestionIndex: number = 0;
-  score: number = 0;
+  puntaje: number = 0;
   selectedAnswer: string = '';
   tiempo = 15;
   temporizador :any|null = null;
@@ -21,7 +22,7 @@ export class PreguntadosComponent implements OnInit, OnDestroy{
   urlFondo = '';
   
 
-  constructor(private preguntadosService: PreguntadosService, private quizService: QuizService) { }
+  constructor(private preguntadosService: PreguntadosService, private quizService: QuizService, private puntajeService:PuntajesService) { }
   ngOnDestroy(): void {
     clearInterval(this.temporizador); // stop tempo
     this.temporizador = null; // saco ref tempo     
@@ -35,22 +36,25 @@ export class PreguntadosComponent implements OnInit, OnDestroy{
   //hacer que el boton de pregunte se active cuando ya sepas que la pregunta este cargada
   selectAnswer(answer: string) {
     this.selectedAnswer = answer;
-    this.checkAnswer();
+    this.checkAnswer();    
   }
 
   checkAnswer() {
     const currentQuestion = this.preguntas[this.currentQuestionIndex];
     //if (this.selectedAnswer === currentQuestion.correct_answer) {
     if (this.selectedAnswer === currentQuestion.correctAnswers) {
-      this.score++;
+      this.puntaje++;
     }
     this.currentQuestionIndex++;
     this.selectedAnswer = '';
+    if(this.currentQuestionIndex == 10){
+      this.guardarPuntaje();
+    }
   }
 
   restartGame() {
     this.currentQuestionIndex = 0;
-    this.score = 0;
+    this.puntaje = 0;
     this.spinnerOn = true;
     this.ngOnInit();
   }
@@ -59,11 +63,10 @@ export class PreguntadosComponent implements OnInit, OnDestroy{
     setTimeout(() => {
       console.log("Demora de 2 segundos completada");
       this.spinnerOn = false;    
-      this.iniciarTemporizador();
-      // Aquí puedes colocar el código que deseas ejecutar después de la demora.
+      this.iniciarTemporizador();    
     }, 2000);    
     this.setBackground(this.preguntas[0].category);
-    // console.log('aca: ',this.preguntas[0].category);
+    console.log('aca: ',this.preguntas[0].category);
   }
   pedirPregunta(){
     
@@ -137,7 +140,7 @@ export class PreguntadosComponent implements OnInit, OnDestroy{
           console.log(this.tiempo);
           
         } else {
-          this.pasarAsiguientePregunta(); //si se acaba el tiempo, ejecuta esta funcion
+          this.pasarAsiguientePregunta(); //si se acaba el tiempo, ejecuto siguiente pregunta
           this.stopTemporizador();
           this.tiempo = 15;
         }
@@ -202,6 +205,16 @@ export class PreguntadosComponent implements OnInit, OnDestroy{
     //   container.style.backgroundSize = 'cover';
     //   container.style.backgroundPosition = 'center';
     //   container.style.opacity = '0.7'; // Atenuar la imagen      
-    // }
+    // }  
+  }
+  async guardarPuntaje() {
+    try {
+      await this.puntajeService.guardarResultado('Preguntados', this.puntaje);
+      //this.restartDisabled = false;
+      console.log('Resultado guardado');      
+    } catch (error) {
+      console.error('Error al guardar puntaje: ', error);
+      //this.restartDisabled = false;
+    }
   }
 }

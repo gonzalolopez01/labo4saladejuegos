@@ -15,7 +15,7 @@
                 <div *ngIf="currentQuestionIndex < preguntas.length; else gameOver" class="d-flex flex-column container-preguntados" [ngStyle]="{'background-image': 'url(' + urlFondo + ')', 'background-size': 'cover', 'background-position': 'center'}">
                     <div class="preguntas-puntaje d-flex justify-content-around">
                         <h2>{{currentQuestionIndex + 1}}/{{preguntas.length}}</h2>
-                        <h2>Puntaje: {{score}}</h2>                        
+                        <h2>Puntaje: {{puntaje}}</h2>                        
                     </div>
                     <div><h2 id="temporizador" class="text-center"> {{tiempo}}</h2></div>
                                                                                                             
@@ -65,7 +65,7 @@
   
 <ng-template #gameOver>
 <h2>Juego Terminado</h2>
-<p>Tu puntaje fue: {{score}}</p>
+<p>Tu puntaje fue: {{puntaje}}</p>
 <button class="btn btn-success" (click)="restartGame()">Reiniciar juego</button>
 </ng-template>
   

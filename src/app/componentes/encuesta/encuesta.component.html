@@ -1,0 +1,140 @@
+<!-- 
+ Nombre y apellido.
+Edad, validar que sean mayores de 18 años y menores de 99 años.
+Número de teléfono, validar que sean solo números y no más de 10 caracteres.
+calificacion juego juego 
+
+Pregunta 1 (Radio Buttons):
+"¿Cuál de los siguientes juegos te gustó más?"
+
+    Opción 1: Juego 1
+    Opción 2: Juego 2
+    Opción 3: Juego 3
+    Opción 4: Juego 4
+
+(Usar <input type="radio">).
+
+Pregunta 2 (Slider):
+"En una escala del 1 al 10, ¿qué tan entretenidos te parecieron los juegos en general?"
+(Usar <input type="range" min="1" max="10"> para que el usuario pueda arrastrar y elegir un valor).
+
+Pregunta 3 (Dropdown Menu):
+"¿Qué tan probable es que recomiendes estos juegos a un amigo?"
+
+    Muy probable
+    Algo probable
+    No es probable
+
+(Usar <select> con <option>). -->
+
+<div class="container">
+    <div class="card p-4 mt-4">
+    
+        <!-- La directiva formGroup va a recibir la instancia del controlador en el onInit. El evento ngSubmit se va a disparar cuando apretemos el boton de enviar de tipo submit -->
+        <form [formGroup]="form" (ngSubmit)="enviarForm()">        
+        <div class="row">
+            <div class="form-control-group col-5">
+                <label class="form-label" for="nombre">Nombre</label>
+                <input type="text" class="form-control" id="nombre" formControlName="nombre">
+                <ng-container *ngIf="nombre?.hasError('pattern')">
+                    <small class="text-danger">Sólo debe contener solo letras</small>
+                </ng-container>
+            </div>
+            
+            <div class="form-control-group col-5">
+                <label class="form-label" for="apellido">Apellido</label>
+                <input type="text" class="form-control" id="apellido" formControlName="apellido">
+                <ng-container *ngIf="apellido?.hasError('pattern')">
+                    <small class="text-danger">Sólo debe contener solo letras</small>
+                </ng-container>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="form-control-group col-5">
+                <label class="form-label" for="edad">Edad</label>
+                <input type="number" class="form-control" id="edad" formControlName="edad">
+                <ng-container *ngIf="edad?.invalid && edad?.touched">
+                    <small *ngIf="edad?.hasError('min') || edad?.hasError('max')" class="text-danger">
+                      Debe ser entre 18 y 99 años de edad
+                    </small>
+                    <small *ngIf="edad?.hasError('required')" class="text-danger">
+                      El campo edad es obligatorio
+                    </small>
+                  </ng-container>
+            </div>
+           
+            <div class="form-control-group col-5">
+                <label class="form-label" for="telefono">Telefono</label>
+                <input type="number" class="form-control" id="telefono" formControlName="telefono">
+                <ng-container *ngIf="telefono?.invalid && telefono?.touched">
+                    <small *ngIf="telefono?.hasError('pattern')" class="text-danger">
+                      Solo se permiten números.
+                    </small>
+                    <small *ngIf="telefono?.hasError('minlength')" class="text-danger">
+                      Debe tener al menos 10 caracteres.
+                    </small>
+                    <small *ngIf="telefono?.hasError('required')" class="text-danger">
+                      El campo teléfono es obligatorio.
+                    </small>
+                  </ng-container>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="form-control-group col-5">
+                <!-- <label class="form-label" for="clave">¿Cuál de los siguientes juegos te gustó más?</label>
+                <input type="radio" class="form-control" id="juegoFavorito" formControlName="juegoFavorito"> -->
+                <!-- <ng-container *ngIf="juegoFavorito?.hasError('minlength')">
+                    <small class="text-danger">
+                    La clave debe tener mínimo {{clave?.getError('minlength').requiredLength}} caracteres
+                    </small>
+                </ng-container> -->
+                <div>
+                    <label>¿Cuál de los siguientes juegos te gustó más?</label><br>
+                  
+                    <input type="radio" id="juego1" formControlName="juegoFavorito" value="Juego 1" required>
+                    <label for="juego1">Juego 1</label><br>
+                  
+                    <input type="radio" id="juego2" formControlName="juegoFavorito" value="Juego 2">
+                    <label for="juego2">Juego 2</label><br>
+                  
+                    <input type="radio" id="juego3" formControlName="juegoFavorito" value="Juego 3">
+                    <label for="juego3">Juego 3</label><br>
+                  
+                    <input type="radio" id="juego4" formControlName="juegoFavorito" value="Juego 4">
+                    <label for="juego4">Juego 4</label><br>
+                  </div>
+            </div>
+    
+            <div class="form-control-group col-5">
+            <label class="form-label" for="entretenimiento">En una escala del 1 al 10, ¿qué tan entretenidos te parecieron los juegos en general?</label>
+            <input type="range" min="1" max="10" class="form-control" id="entretenimiento" formControlName="entretenimiento">
+            <!-- <small class="text-danger">                
+                {{repiteClave?.getError('noCoincide')}}
+            </small> -->
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <label for="recomendacion">¿Qué tan probable es que recomiendes estos juegos a un amigo?</label>
+                <select id="recomendacion" class="form-control" formControlName="recomendacion" required>
+                  <option value="" disabled selected>Seleccione una opción</option>
+                  <option value="Muy probable">Muy probable</option>
+                  <option value="Algo probable">Algo probable</option>
+                  <option value="No es probable">No es probable</option>
+                </select>
+                <ng-container *ngIf="recomendacion?.invalid && recomendacion?.touched">
+                  <small class="text-danger">Es necesario seleccionar una opción</small>
+                </ng-container>
+              </div>          
+        </div>
+    
+        <!-- deshabilito el boton cuando el form sea invalido. Form.invalid es propiedad de abstract control, podria hacerse con el el control email -->
+        <button [disabled]="form.invalid" type="submit" class="btn btn-primary w-25 mt-4">
+            Enviar
+        </button>
+    
+        </form>
+    </div>
+    </div>

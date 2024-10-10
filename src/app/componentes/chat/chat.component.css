@@ -74,6 +74,8 @@
   text-align: right;
   margin-left: auto;
   max-width: 80%;
+  border-radius: 8px;
+  color: black;
 }
 
 .otro-mensaje {
@@ -81,9 +83,12 @@
   text-align: left;
   margin-right: auto;
   max-width: 80%;
+  border-radius: 8px;  
+  color: black;
 }
 
 p {
   padding: 10px;
   border-radius: 5px;
+  
 }
