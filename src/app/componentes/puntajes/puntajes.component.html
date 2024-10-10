@@ -1,0 +1,19 @@
+<div class="container">
+    <h2>Listado de Puntajes</h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Usuario</th>
+          <th>Juego</th>
+          <th>Puntaje Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let puntaje of puntajes">
+          <td>{{ puntaje.usuario }}</td>
+          <td>{{ puntaje.juego }}</td>
+          <td>{{ puntaje.puntajeTotal }}</td>
+        </tr>
+      </tbody>
+    </table>
+</div>
