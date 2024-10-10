@@ -58,6 +58,7 @@ export class PreguntadosComponent implements OnInit, OnDestroy{
     this.spinnerOn = true;
     this.ngOnInit();
   }
+
   comenzar(): void {
     this.jugando = true;    
     setTimeout(() => {
@@ -65,11 +66,11 @@ export class PreguntadosComponent implements OnInit, OnDestroy{
       this.spinnerOn = false;    
       this.iniciarTemporizador();    
     }, 2000);    
-    this.setBackground(this.preguntas[0].category);
+    //this.setBackground(this.preguntas[0].category);
     console.log('aca: ',this.preguntas[0].category);
   }
-  pedirPregunta(){
-    
+
+  pedirPregunta(){  
     this.cargandoJuego = true;                    
     this.quizService.getQuestions().subscribe(data => {     
       this.preguntas = data.questions;            
@@ -78,7 +79,8 @@ export class PreguntadosComponent implements OnInit, OnDestroy{
         pregunta.allAnswers = [...pregunta.incorrectAnswers, pregunta.correctAnswers];
         pregunta.allAnswers.sort(() => Math.random() - 0.5);
       });      
-      this.cargandoJuego = false; //ya cargó, saco el spinner                    
+      this.cargandoJuego = false; //ya cargó, saco el spinner  
+      this.setBackground(this.preguntas[0].category);                  
       
       // if(this.currentQuestionIndex == 0){
       //   this.iniciarTemporizador();  
@@ -173,15 +175,15 @@ export class PreguntadosComponent implements OnInit, OnDestroy{
     console.log(category);
     switch (category) {
       case 'geography':        
-        this.urlFondo = 'assets/img/preguntados/geografia.jpg';  // Agrega la URL que quieras  
+        this.urlFondo = 'assets/img/preguntados/geografia.jpg'; 
         console.log("entre")      ;
         break;
       case 'arts&literature':
-        this.urlFondo = 'assets/img/preguntados/literatura.jpg'; // URL para artes y literatura        
+        this.urlFondo = 'assets/img/preguntados/literatura.jpg';
         console.log("entre")      ;
         break;
       case 'entertainment':
-        this.urlFondo = 'assets/img/preguntados/entretenimiento.jpg'; // URL para entretenimiento        
+        this.urlFondo = 'assets/img/preguntados/entretenimiento.jpg';
         console.log("entre")      ;
         break;
       case 'science&nature':
@@ -189,15 +191,15 @@ export class PreguntadosComponent implements OnInit, OnDestroy{
         console.log("entre")      ;
         break;
       case 'sports&leisure':
-        this.urlFondo = 'assets/img/preguntados/deportes.jpg'; // URL para deportes y ocio        
+        this.urlFondo = 'assets/img/preguntados/deportes.jpg';
         console.log("entre")      ;
         break;
       case 'history':
-        this.urlFondo = 'assets/img/preguntados/deportes.jpg'; // URL para historia
+        this.urlFondo = 'assets/img/preguntados/deportes.jpg';
         console.log("entre")      ;
         break;
       default:
-        this.urlFondo = ''; // URL por defecto si no hay categoría válida
+        this.urlFondo = '';
     }    
     // console.log(container);
     // if (container) {

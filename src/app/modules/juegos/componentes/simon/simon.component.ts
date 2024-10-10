@@ -9,9 +9,9 @@ import { PuntajesService } from '../../../../services/puntajes.service';
   styleUrl: './simon.component.css'
 })
 export class SimonComponent {
-  moves: number[] = [];
-  totalMoves: number = 0;
-  message: string = 'Haz clic en comenzar';
+  movimientos: number[] = [];
+  totalMovimientos: number = 0;
+  mensaje: string = 'Haz clic en comenzar';
   isPlayerTurn: boolean = false;
   cells: HTMLElement[] = [];
 
@@ -50,35 +50,35 @@ export class SimonComponent {
     }, time);
   }
   setMoves(current: number) {//guarda la cantidad de moves al azar que le digas
-    this.moves.push(Math.floor(Math.random() * 4) + 1);//guarda numero al azar 1 a 4 en el array
-    if (current < this.totalMoves) {
+    this.movimientos.push(Math.floor(Math.random() * 4) + 1);//guarda numero al azar 1 a 4 en el array
+    if (current < this.totalMovimientos) {
       this.setMoves(++current);
     }
   }
 
   startGame() {
-    this.moves = [];
-    this.totalMoves = 2;
-    this.message = 'Simón dice';
+    this.movimientos = [];
+    this.totalMovimientos = 2;
+    this.mensaje = 'Simón dice';
     this.isPlayerTurn = false;
     this.restartDisabled = true;
     this.sequence();
   }
 
   sequence() {
-    this.moves = [];
+    this.movimientos = [];
     this.setMoves(1);
-    this.message = 'Simón dice';
+    this.mensaje = 'Simón dice';
     this.isPlayerTurn = false;
 
-    for (let i = 0; i < this.moves.length; i++) {
-      this.illuminate(this.moves[i], 600 * i);//ilumina las celdas guardadas
+    for (let i = 0; i < this.movimientos.length; i++) {
+      this.illuminate(this.movimientos[i], 600 * i);//ilumina las celdas guardadas
     }
 
     setTimeout(() => {
-      this.message = 'Tu turno';
+      this.mensaje = 'Tu turno';
       this.isPlayerTurn = true;
-    }, 600 * this.moves.length);
+    }, 600 * this.movimientos.length);
   }
 
   cellClick(cellPos: number) {
@@ -87,26 +87,26 @@ export class SimonComponent {
     }
     this.illuminate(cellPos, 0);
 
-    if (this.moves && this.moves.length) {
-      if (this.moves[0] === cellPos) {
-        this.moves.shift();
+    if (this.movimientos && this.movimientos.length) {
+      if (this.movimientos[0] === cellPos) {
+        this.movimientos.shift();
         this.puntaje++;
-        if (!this.moves.length) {
-          this.totalMoves++;
+        if (!this.movimientos.length) {
+          this.totalMovimientos++;
           this.isPlayerTurn = false;
           setTimeout(() => {
             this.sequence();
           }, 1000);
         }
       } else {
-        this.message = 'GAME OVER';
+        this.mensaje = 'GAME OVER';
         this.isPlayerTurn= false;
         // setTimeout(() => {
         //   this.message = 'Haz clic en comenzar';
         // }, 1000);
         setTimeout(() => {          
           this.guardarPuntaje();
-          this.message = 'Haz clic en comenzar';
+          this.mensaje = 'Haz clic en comenzar';
          }, 1000); 
       }
     }

@@ -13,7 +13,7 @@ export class AhorcadoComponent  implements OnInit{
 
   char: string = '';
   palabraIncompleta: string [] = [];
-  palabras: string[] = ['PERRO', 'GATO', 'PAJARO'];
+  palabras: string[] = ['PERRO', 'GATO', 'PAJARO', 'ELEFANTE', 'TIGRE', 'CANGURO', 'JIRAFA', 'COCODRILO', 'RINOCERONTE', 'HIPOPOTAMO', 'LEON', 'SERPIENTE', 'CONEJO'];
   teclado: string[] = [];  
   imagenes: string[] = [
     'assets/img/ahorcado/0.jpg',
