@@ -109,7 +109,7 @@ export class LoginComponent implements OnInit {
     if($toast!=null){
       console.log($toast);
       const body = $toast.querySelector('.toast-body');
-      body!.textContent = "El usuario debe ser de tipo e-mal";
+      body!.textContent = "El usuario debe ser de tipo e-mail";
       console.log(body!.textContent);
       var toastElement = new bootstrap.Toast($toast);
       toastElement.show();

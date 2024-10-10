@@ -27,13 +27,20 @@ Pregunta 3 (Dropdown Menu):
 
 (Usar <select> con <option>). -->
 
-<div class="container">
-    <div class="card p-4 mt-4">
-    
-        <!-- La directiva formGroup va a recibir la instancia del controlador en el onInit. El evento ngSubmit se va a disparar cuando apretemos el boton de enviar de tipo submit -->
-        <form [formGroup]="form" (ngSubmit)="enviarForm()">        
-        <div class="row">
-            <div class="form-control-group col-5">
+<div class="container d-flex flex-column align-items-center">
+    <div>
+      <h2>Encuesta</h2>
+    </div>
+    <div *ngIf="isLoading; else elseBlock;" class="spinner-overlay">
+      <div class="spinner-border text-succes" role="status">
+          <span class="visually-hidden">Cargando...</span>
+      </div>
+    </div>
+    <ng-template #elseBlock>
+      <div class="card p-4 mt-4">    
+          <!-- La directiva formGroup va a recibir la instancia del controlador en el onInit. El evento ngSubmit se va a disparar cuando apretemos el boton de enviar de tipo submit -->
+        <form [formGroup]="form" (ngSubmit)="enviarForm()">                
+            <div class="form-control-group ">
                 <label class="form-label" for="nombre">Nombre</label>
                 <input type="text" class="form-control" id="nombre" formControlName="nombre">
                 <ng-container *ngIf="nombre?.hasError('pattern')">
@@ -41,17 +48,15 @@ Pregunta 3 (Dropdown Menu):
                 </ng-container>
             </div>
             
-            <div class="form-control-group col-5">
+            <div class="form-control-group">
                 <label class="form-label" for="apellido">Apellido</label>
                 <input type="text" class="form-control" id="apellido" formControlName="apellido">
                 <ng-container *ngIf="apellido?.hasError('pattern')">
                     <small class="text-danger">Sólo debe contener solo letras</small>
                 </ng-container>
             </div>
-        </div>
         
-        <div class="row">
-            <div class="form-control-group col-5">
+            <div class="form-control-group">
                 <label class="form-label" for="edad">Edad</label>
                 <input type="number" class="form-control" id="edad" formControlName="edad">
                 <ng-container *ngIf="edad?.invalid && edad?.touched">
@@ -63,8 +68,8 @@ Pregunta 3 (Dropdown Menu):
                     </small>
                   </ng-container>
             </div>
-           
-            <div class="form-control-group col-5">
+            
+            <div class="form-control-group">
                 <label class="form-label" for="telefono">Telefono</label>
                 <input type="number" class="form-control" id="telefono" formControlName="telefono">
                 <ng-container *ngIf="telefono?.invalid && telefono?.touched">
@@ -79,62 +84,87 @@ Pregunta 3 (Dropdown Menu):
                     </small>
                   </ng-container>
             </div>
-        </div>
-        
-        <div class="row">
-            <div class="form-control-group col-5">
-                <!-- <label class="form-label" for="clave">¿Cuál de los siguientes juegos te gustó más?</label>
-                <input type="radio" class="form-control" id="juegoFavorito" formControlName="juegoFavorito"> -->
-                <!-- <ng-container *ngIf="juegoFavorito?.hasError('minlength')">
-                    <small class="text-danger">
-                    La clave debe tener mínimo {{clave?.getError('minlength').requiredLength}} caracteres
-                    </small>
-                </ng-container> -->
-                <div>
-                    <label>¿Cuál de los siguientes juegos te gustó más?</label><br>
-                  
-                    <input type="radio" id="juego1" formControlName="juegoFavorito" value="Juego 1" required>
-                    <label for="juego1">Juego 1</label><br>
-                  
-                    <input type="radio" id="juego2" formControlName="juegoFavorito" value="Juego 2">
-                    <label for="juego2">Juego 2</label><br>
-                  
-                    <input type="radio" id="juego3" formControlName="juegoFavorito" value="Juego 3">
-                    <label for="juego3">Juego 3</label><br>
-                  
-                    <input type="radio" id="juego4" formControlName="juegoFavorito" value="Juego 4">
-                    <label for="juego4">Juego 4</label><br>
-                  </div>
-            </div>
-    
-            <div class="form-control-group col-5">
+      
+          <div class="form-control-group">
+            <label for="recomendacion">¿Qué tan probable es que recomiendes estos juegos a un amigo?</label>
+            <select id="recomendacion" class="form-control" formControlName="recomendacion" required>
+              <option value="" disabled selected>Seleccione una opción</option>
+              <option value="Muy probable">Muy probable</option>
+              <option value="Poco probable">Poco probable</option>
+              <option value="No es probable">No es probable</option>
+            </select>
+            <ng-container *ngIf="recomendacion?.invalid && recomendacion?.touched">
+              <small class="text-danger">Es necesario seleccionar una opción</small>
+            </ng-container>
+          </div>        
+
+          <div class="form-control-group">
             <label class="form-label" for="entretenimiento">En una escala del 1 al 10, ¿qué tan entretenidos te parecieron los juegos en general?</label>
             <input type="range" min="1" max="10" class="form-control" id="entretenimiento" formControlName="entretenimiento">
             <!-- <small class="text-danger">                
                 {{repiteClave?.getError('noCoincide')}}
             </small> -->
+          </div>
+
+          
+            <div class="form-control-group">
+              <label>¿Cuál de los siguientes juegos te gustó más?</label><br>              
+                <div class="d-inline-block me-4">
+                  <input type="radio" id="juego1" formControlName="juegoFavorito" value="Juego 1">
+                  <label for="juego1">Ahorcado</label>
+                </div>
+                
+                <div class="d-inline-block me-4">
+                  <input type="radio" id="juego2" formControlName="juegoFavorito" value="Juego 2">
+                  <label for="juego2">Mayor o Menor</label>
+                </div>                        
+                
+                <div class="d-inline-block me-4">
+                  <input type="radio" id="juego3" formControlName="juegoFavorito" value="Juego 3">
+                  <label for="juego3">Preguntados</label>
+                </div>
+                
+                <div class="d-inline-block me-4">
+                  <input type="radio" id="juego4" formControlName="juegoFavorito" value="Juego 4">
+                  <label for="juego4">Simon Says</label>
+                </div>              
             </div>
-        </div>
-        <div class="row">
-            <div class="form-group">
-                <label for="recomendacion">¿Qué tan probable es que recomiendes estos juegos a un amigo?</label>
-                <select id="recomendacion" class="form-control" formControlName="recomendacion" required>
-                  <option value="" disabled selected>Seleccione una opción</option>
-                  <option value="Muy probable">Muy probable</option>
-                  <option value="Algo probable">Algo probable</option>
-                  <option value="No es probable">No es probable</option>
-                </select>
-                <ng-container *ngIf="recomendacion?.invalid && recomendacion?.touched">
-                  <small class="text-danger">Es necesario seleccionar una opción</small>
-                </ng-container>
-              </div>          
-        </div>
-    
+          
+
+        
+        <!-- spinner -->
+        <!-- <div *ngIf="isLoading" class="spinner-border text-primary" role="status">
+          <span class="sr-only">Loading...</span>
+        </div> -->        
+
         <!-- deshabilito el boton cuando el form sea invalido. Form.invalid es propiedad de abstract control, podria hacerse con el el control email -->
-        <button [disabled]="form.invalid" type="submit" class="btn btn-primary w-25 mt-4">
+        <button [disabled]="form.invalid" type="submit" class="btn btn-success w-25 mt-4 form-control">
             Enviar
         </button>
-    
+
         </form>
+      </div>
+    </ng-template>
+    <div class="toast" id= "miTostada" role="alert" aria-live="assertive" aria-atomic="true" style="position: absolute; top: 20px; right:20px;">
+      <div class="toast-header">
+        <img src="../../../assets/img/admiracion.png" class="rounded me-2" alt="...">
+        <strong class="me-auto">Atencion!</strong>
+        <!-- <small>11 mins ago</small> -->
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body">
+        Hello, world! This is a toast message.
+      </div>
     </div>
+    <div class="toast" id= "miTostada2" role="alert" aria-live="assertive" aria-atomic="true" style="position: absolute; top: 20px; right:20px;">
+      <div class="toast-header">
+        <img src="../../../assets/img/tilde.png" class="rounded me-2" alt="...">
+        <strong class="me-auto">Atencion!</strong>
+        <!-- <small>11 mins ago</small> -->
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body">
+        Hello, world! This is a toast message.
+      </div>
     </div>
+  </div>

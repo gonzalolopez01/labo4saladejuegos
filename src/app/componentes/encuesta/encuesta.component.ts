@@ -4,6 +4,8 @@ import { Auth } from '@angular/fire/auth';
 import { FormBuilder, FormControl, FormGroup, NgModel, ReactiveFormsModule, Validators } from '@angular/forms';
 import { EncuestaService } from '../../services/encuesta.service';
 
+declare var bootstrap: any;
+
 @Component({
   selector: 'app-encuesta',
   standalone: true,
@@ -13,6 +15,8 @@ import { EncuestaService } from '../../services/encuesta.service';
 })
 export class EncuestaComponent implements OnInit {
   form!: FormGroup;
+
+  isLoading = false;
   
   //constructor(private fb: FormBuilder, private usuariosService: UsuariosService) {}
   constructor(private fb: FormBuilder, public auth:Auth, private encuestaService:EncuestaService) {}
@@ -53,15 +57,62 @@ export class EncuestaComponent implements OnInit {
   get recomendacion() {
     return this.form.get('recomendacion');
   }
+  // enviarForm() {
+
+  //   this.form.markAllAsTouched();//todos los controles como si hubiesen sido clickeados(para mostrar errores)
+
+  //   if(this.form.pristine){//dice si el form fue modificado o no
+  //     console.log("no se modifico");
+  //   }
+  //   console.log(this.auth.currentUser!.email);
+  //   console.log(this.form.value);
+  //   this.encuestaService.enviarEncuesta(this.auth.currentUser!.email as string, this.form.value);
+  // }
   enviarForm() {
-
-    this.form.markAllAsTouched();//todos los controles como si hubiesen sido clickeados(para mostrar errores)
-
-    if(this.form.pristine){//dice si el form fue modificado o no
-      console.log("no se modifico");
+    this.form.markAllAsTouched(); // Marca todos los campos como tocados para mostrar errores
+    if (this.form.invalid) {
+      return; // Si el formulario es inválido, no continuar
     }
-    console.log(this.auth.currentUser!.email);
-    console.log(this.form.value);
-    this.encuestaService.enviarEncuesta(this.auth.currentUser!.email as string, this.form.value);
+
+    this.isLoading = true;  // Mostrar spinner
+
+    const formData = this.form.value;
+    const userEmail = this.auth.currentUser!.email as string;
+
+    this.encuestaService.enviarEncuesta(userEmail, formData).subscribe({
+      next: (response) => {
+        console.log('Formulario enviado exitosamente', response);
+        this.toastSucces();
+        this.isLoading = false;  //oculto spinner
+        this.form.reset();  //reset form
+      },
+      error: (err) => {
+        console.error('Error al enviar el formulario', err);
+        this.toastError();
+        this.isLoading = false;
+      }
+    });
   }
+  toastError(){    
+    var $toast = document.getElementById("miTostada");
+    if($toast!=null){
+      console.log($toast);
+      const body = $toast.querySelector('.toast-body');
+      body!.textContent = "No fue posible enviar el formulario";
+      console.log(body!.textContent);
+      var toastElement = new bootstrap.Toast($toast);
+      toastElement.show();
+    }  
+  } 
+  toastSucces(){    
+    var $toast = document.getElementById("miTostada2");
+    if($toast!=null){
+      console.log($toast);
+      const body = $toast.querySelector('.toast-body');
+      body!.textContent = "Formulario enviado con exito";
+      console.log(body!.textContent);
+      var toastElement = new bootstrap.Toast($toast);
+      toastElement.show();
+    }  
+  } 
 }
